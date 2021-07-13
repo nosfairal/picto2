@@ -1,0 +1,82 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}Connexion | PictoPicto{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/connexion.css') }}" type="text/css">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid" id="wrapper">
+        <div class="row" id="LogoRow">
+            <div class="col-12 col-md-6 offset-md-6 text-center mt-md-5 mt-1 mb-3">
+                <a id="logo" class="px-3 my-4" href="{{ path('home') }}"><img src="{{ asset('img/LogoEcam.png') }}" alt="PictoPicto">
+                </a>
+            </div>
+        </div>
+        <div class="row align-middle" id="contentRow">
+            <div class="col-10 col-md-5 offset-1 pt-3" id="connexion">
+                <div class="my-auto">
+                    <h5 class="text-center display-6">Connexion</h5>
+                    <form method="post">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        {% if app.user %}
+                            <div class="mb-3">
+                                Vous êtes connecté {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                            </div>
+                        {% endif %}
+
+                        <div class="input my-4 mx-auto">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                        </div>
+                        <div class="input my-4 mx-auto">
+                            <label for="inputPassword">Mot de Passe</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" required>
+                            <a href="{{ path('app_forgot_password_request') }}" class="d-block text-end text-muted fw-light">Mot de passe oublié ?</a>
+                        </div>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <div class="text-center my-4">
+                            <button class="btn py-2 px-3" type="submit" id="logIn">Se Connecter</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-4">
+                        Pas encore de compte ?
+                        <a href="{{ path('register') }}" class="text-body">S'inscrire</a>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="text-center d-md-none guestMobile col-10 col-md-5 offset-1">
+                <div class="bounce">
+                    <i class="bi bi-arrow-down-circle text-white"></i>
+                </div>
+                <a href="{{ path('guest') }}" class="text-light text-decoration-none">Découvrir?</a>
+            </div>
+            <div class="col-6 px-5 d-none d-md-block text-light text-center" id="guest">
+                <h1 class="display-6">Bienvenue sur PictoPicto!</h1>
+                <p>Destinée à développer la communication à l'aide de pictogrammes, l'application est réservée aux professionnels de santé qui en font la demande. <br>
+                    <br>L'inscription vous permettra un suivi des progrès de votre patient ainsi que l'intégration de nouveaux pictogrammes choisis par vos soins.
+                </p>
+                <p id="p-5">Vous n'êtes pas un professionnel de santé? <br> Le mode invité vous permettra de découvrir notre application en toute liberté</p>
+                        <div class="text-center">
+                            <div class="btn btnGuest">
+                                <a href="{{ path('guest') }}">Mode invité</a>
+                            </div>
+                         </div>
+            </div>
+        </div>
+        <footer class="text-light mt-md-5 mt-2">
+            <a href="{{ path('mentions') }}">Mentions légales </a> |
+{#            <a href="#">Prendre contact</a>|#}
+            <a href="{{ path('partners') }}">Partenaires </a>|
+            <a href="{{ path('a_propos') }}">A Propos</a>
+        </footer>
+    </div>
+
+
+
+{% endblock %}
+

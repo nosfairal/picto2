@@ -1,0 +1,229 @@
+{% extends 'base.html.twig' %}
+                        {# css carrousel, drag and drop, jquery#}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styleUser.css') }}" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.structure.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.theme.css') }}"/>
+{% endblock %}
+
+{% block body %}
+    <main class="row gx-0 ">
+        {% block content %}
+            <div id="content" class="col-10 py-5 ms-auto">
+                {% block dialogue %}
+                {% endblock %}
+                {% block echange %}
+                {% endblock %}
+                {# Drop #}
+                <hr class="my-3">
+                <div id="drop" class="d-flex justify-content-evenly px-lg-5 mb-3">
+                    <div id="mot1" class="drop"></div>
+                    <div id="mot2" class="drop"></div>
+                    <div id="mot3" class="drop"></div>
+                    <div id="mot4" class="drop"></div>
+                    <div id="mot5" class="drop"></div>
+                    <div id="mot6" class="drop"></div>
+                </div>
+                {# end Drop #}
+                {# Phrase #}
+                {% block phrase %}
+                    <div id="sentence" class="d-flex align-items-center">
+                        <div id="sentenceField" class="flex-grow-1 text-center py-1  border-radius-all ">
+                            <span id="sentenceText"></span>
+                        </div>
+                    </div>
+                {% endblock %}
+                {# end Phrase #}
+            </div>
+        {% endblock %}
+        {# end Content #}
+
+        {# Commandes #}
+        {% if block('commands') is defined %}
+            <div id="commands" class="col-1 px-3 pb-auto ms-auto">
+            {# Menu #}
+            {% if block('menu') is defined %}
+                <div id="nav">
+                    <nav class="navbar navbar-dark">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fas fa-bars fa-2x"></i>
+                        </button>
+                    </nav>
+                    <div class="collapse position-absolute top-0 end-0 mt-5" id="navbarToggleExternalContent">
+                        <div class="mt-5 text-right ">
+                            {% if app.request.get('_route') == 'add_sentence' %}
+                                <a href="{{ path('dialogue', {'id' : patient.id }) }}" class="nav-link py-4 px-3 d-block text-left">
+                                    <i class="fas fa-question pe-3"></i> Dialogue</a>
+                            {% endif %}
+                            {% if app.request.get('_route') == 'dialogue' %}
+                                <a href="{{ path('exchange', {'id' : patient.id }) }}" class="nav-link py-4 px-3 d-block text-left">
+                                    <i class="fas fa-comment-dots pe-3"></i> Echange</a>
+                            {% endif %}
+                            {% if app.request.get('_route') == 'guest_exchange' %}
+                                <a href="{{ path('guest_dialogue') }}" class="nav-link py-4 px-3 d-block text-left">
+                                    <i class="fas fa-question pe-3"></i> Dialogue</a>
+                            {% endif %}
+                            {% if app.request.get('_route') == 'guest_dialogue' %}
+                                <a href="{{ path('guest_exchange') }}" class="nav-link py-4 px-3 d-block text-left">
+                                    <i class="fas fa-comment-dots pe-3"></i> Echange</a>
+                            {% endif %}
+                            {% if patient is defined %}
+                               {# <a href="{{ path('audio', {'id' : patient.id }) }}" class="nav-link py-4 px-3 d-block text-left">
+                                    <i class="fas fa-volume-up pe-3"></i> Audio</a>#}
+                                <a href="{{ path('patient') }}" class="nav-link py-4 px-3 d-block text-left">
+                                    <i class="fas fa-door-open pe-3"></i> Déconnexion</a>
+                            {% else %}
+                            <a href="{{ path('home') }}" class="nav-link py-4 px-3 d-block text-left">
+                                <i class="fas fa-door-open pe-3"></i> Accueil</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {# end Menu #}
+
+            {# Boutons #}
+            {% if block('buttons') is defined %}
+                <div id="commandButtons" class="d-flex flex-column">
+                    {# Bouton Lecture #}
+                    <button id="play" class="btn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="playWordByWord" class="btn">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    {# end Bouton Lecture #}
+                    {# Bouton Négatif #}
+                    <button id="neg" class="btn">
+                        <i class="fas fa-thumbs-down"></i>
+                    </button>
+                    <button id="pos" class="btn">
+                        <i class="fas fa-thumbs-up"></i>
+                    </button>
+                    {# end Bouton Négatif #}
+                    {#{% if patient is defined %}
+                        #}{# Bouton Entregistrement Audio #}{#
+                        <button id="mic" class="btn" data-toggle="modal" data-target="#audioConf">
+                            <i class="fas fa-microphone-alt"></i>
+                        </button>
+                        <button id="stopRecordingButton" class="btn stop" type="submit">
+                            <i class="bi bi-stop-fill"></i><input type="hidden" id="sentenceAudio">
+                        </button>
+#}{#                        {{ form_widget(formText.audio) }}#}{#
+#}{#                        {{ form_end(formText) }}#}{#
+                        #}{# end Bouton Enregistrement Audio #}{#
+                        #}{# Modal de Confirmation d'Enregistrement Audio #}{#
+                        <div class="modal fade" id="audioConf" tabindex="-1" role="dialog" aria-labelledby="audioConf" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <h5 class="modal-title text-body">Sauvegarder l'enregistrement vocal ?</h5>
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-around border-0">
+                                        <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal"><i class="bi bi-x"></i></button>
+                                        #}{# Bouton Submit #}{#
+                                        <button type="button" class="btn btn-success rounded-pill"><i class="bi bi-check2"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        #}{# end Modal de Confirmation d'Enregistrement Audio #}{#
+                    {% endif %}#}
+                    {# Bouton microphone #}
+                    {% if app.user %}
+                        <button type="button" id="mic" class="btn" data-bs-toggle="modal" data-bs-target="#mic-modalBackdrop">
+                            <i class="fas fa-microphone-alt"></i>
+                        </button>
+
+                        <div class="modal fade" id="mic-modalBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="mic-modalBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content text-dark">
+                                    <div class="modal-header justify-content-center">
+                                        <h5 class="modal-title" id="mic-modalBackdropLabel">Enregistrement Audio</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input class=" d-none" type="checkbox" id="live"/>
+                                        <canvas id="level" height="200" width="465"></canvas>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" id="stop" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+                                        <a href="{{ path('api_audio', {id: patient.id }) }}" id="save" class="btn btn-success enabled" data-bs-dismiss="modal">Sauvegarder</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {# end Bouton microphone #}
+                    {# Bouton Poubelle #}
+                    <button id="trash" class="btn">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    {# end Bouton Poubelle #}
+                    {# Bouton aide utilisateur #}
+                    <button id="help"  class="mt-5" data-toggle="modal" data-target="#help-modal">
+                        <i class="bi bi-patch-question"></i>
+                    </button>
+                    <div class="modal fade" id="help-modal" tabindex="-1" aria-labelledby="help-modal" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content text-dark">
+                                <div class="modal-header justify-content-center">
+                                    <h5 class="modal-title " id="help-modal">Comment utiliser l'application?</h5>
+                                </div>
+                                <div class="modal-body px-5">
+                                    <h6 class="text-center">Échange</h6>
+                                    <p> La première ligne de pictogrammes correspond aux différentes catégories: <br>appuyez dessus pour voir apparaître en dessous les pictogrammes qui lui sont associés. <BR> <BR>
+                                        Déplacez le pictogramme de votre choix (hors catégories) à l'aide de la souris ou du doigt pour composer la phrase.
+                                        <br> Les mots apparaissent! <br> <br>
+                                        Plusieurs choix s'offrent à vous: <br> <br>
+                                    <div class="ms-5">
+                                        <div id="play-modal" class="btn" ><i class="fas fa-play"></i></div> Lire la phrase constituée <br>
+                                        <div id="playWordByWord-modal" class="btn" ><i class="fas fa-step-backward"></i></div> Lire la phrase constituée mot par mot <br>
+                                        <div id="neg-modal" class="btn" ><i class="fas fa-thumbs-down"></i></div> Rendre la phrase négative <br>
+                                        <div id="pos-modal" class="btn"><i class="fas fa-thumbs-up"></i></div>Rendre la phrase positive<br>
+{#                                        <div id="mic-modal" class="btn" ><i class="fas fa-microphone-alt"></i></div> Enregistrer la voix du patient<br>
+                                        <div id="stopRecording-modal" class="btn"><i class="bi bi-stop-fill"></i></div> Arrêter l'enregistrement de la voix <br>#}
+                                        <div id="star-modal" class="btn"><i class="fas fa-star" ></i></div> Stocker la phrase dans le dossier du patient<br>
+                                        <div id="trash-modal" class="btn my-1"><i class="fas fa-trash-alt"></i></div> Supprimer les mots et les pictogrammes sélectionnés
+                                    </div>
+
+                                    </p>
+                                    <h6 class="text-center">Dialogue</h6>
+                                    <p>La partie Dialogue vous permet de choisir une question. Les pictogrammes directement associés apparaissent pour permettre au patient de formuler sa propre réponse.</p>
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Compris!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# end bouton aide #}
+                </div>
+                </div>
+            {% endif %}
+            {# end Boutons #}
+
+        {% endif %}
+        {# end Commandes #}
+
+
+    </main>
+{% endblock  %}
+{# end Body #}
+
+                {# js carousel, drag and drop, jquery#}
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/jquery-3.6.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.ui.touch-punch.js') }}"></script>
+    <script src="{{ asset('js/drag-and-drop.js') }}"></script>
+    <script src="{{ asset('js/ajaxPictogram.js') }}"></script>
+    <script src="{{ asset('js/question.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/carousel.js') }}"></script>
+    <script src="{{ asset('js/conjugating.js') }}"></script>
+    <script src="{{ asset('js/negatif.js') }}"></script>
+{% endblock %}

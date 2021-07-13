@@ -1,0 +1,50 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}Observations | PictoPicto{% endblock %}
+
+    {% block content %}
+        <!-- titre de l'item choisi -->
+        <div class="d-flex justify-content-between">
+            <span class="title">Observations de {{ patient.firstname }} {{ patient.lastname }}</span>
+            <a href="{{ path('add_note', { 'id' : patient.id }) }}" class="btn btn-sm inHeader d-none d-md-block">Ajouter une observation</a>
+        </div>
+        <div class="container-fluid mt-3 py-2 px-4 background">
+
+            {#<div class="row gx-0">
+            <div class="col-6 col-lg-5 p-0">
+                <!-- barre de recherche -->
+                <div class="input-group" id="searchInput">
+                    {{ form_start(form) }}
+                    <div class="d-flex">
+                        {{ form_row(form.string) }}
+                        {{ form_row(form.submit) }}
+                    </div>
+                    {{ form_end(form) }}
+            #}{#<input class="form-control" type="search" placeholder="Rechercher">
+                            <button class="btn" type="submit"><i class="bi bi-search"></i></button>#}{#
+            </div>
+        </div>
+
+    </div>#}
+            <!-- tableau -->
+            <table class="table mx-auto">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Observations</th>
+                    <th class="d-none d-md-inline-block">Ajoutée par</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for note in notes %}
+                    <tr>
+                        <td>{{ note.createdAt|date('d/m/Y') }}</td>
+                        <td class="text-wrap">{{ note.comment }}</td>
+                        <td class="d-none d-md-inline-block">{{ note.therapist }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{{ path('patient_profile', { 'id' : patient.id }) }}" class="btn fixed-bottom d-inline-block me-auto ms-4 my-5">Retour au profil de {{ patient.firstname }}</a>
+    {% endblock %}

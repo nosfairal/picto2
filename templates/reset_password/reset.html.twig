@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialisation mot de passe{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/connexion.css') }}" type="text/css">
+{% endblock %}
+{% block body %}
+<div class="text-center mt-4">
+    <a id="logo" class="px-3" href="{{ path('home') }}"><img src="{{ asset('img/LogoEcam.png') }}" alt="Ecam">
+    </a>
+</div>
+<main id="homeWrapper" class="container my-4 py-4 px-5">
+    <h4 class="text-center">Réinitialisez votre mot de passe</h4>
+    {{ form_start(resetForm) }}
+    {% if not resetForm.vars.valid %}
+        <div class="alert alert-danger">
+            {{ form_errors(resetForm.plainPassword.first) }}
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <div class="my-4">
+                {{ form_label(resetForm.plainPassword.first) }}{{ form_widget(resetForm.plainPassword.first) }}
+            </div>
+            <div class="my-4">
+                {{ form_label(resetForm.plainPassword.second) }}{{ form_widget(resetForm.plainPassword.second) }}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="text-center">
+        <button class="btn resetPassword">Réinitialiser</button>
+    </div>
+    {{ form_end(resetForm) }}
+</main>
+{% endblock %}

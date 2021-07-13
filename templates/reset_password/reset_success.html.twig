@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialisation confirmée!{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/connexion.css') }}" type="text/css">
+{% endblock %}
+{% block body %}
+    <div class="text-center mt-4">
+        <a id="logo" class="px-3" href="{{ path('home') }}"><img src="{{ asset('img/LogoEcam.png') }}" alt="Ecam">
+        </a>
+    </div>
+    <main id="homeWrapper" class="container my-4 py-4 px-5">
+        <p class="alert alert-success">
+           Votre mot de passe a été réinitialisé avec succès.
+        </p>
+        <div class="p-5 text-center">
+            <a class="btn resetPassword" href="{{ path('home') }}">Revenir à l'accueil</a>
+        </div>
+
+    </main
+{% endblock %}

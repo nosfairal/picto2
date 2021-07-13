@@ -1,0 +1,34 @@
+{% extends 'basePatient.html.twig' %}
+
+{% block content %}
+    <div id="wrapperMenu" class="container col-11 my-2">
+        <div id="logo" class="text-center my-4">
+            <a href="{% if patient is defined %}{{ path('patient_profile', {'id' : patient.id }) }}{% else %}{{ path('home') }}{% endif %}">
+                <img src="{{ asset('img/LogoEcam.png') }}" alt="Ecam">
+            </a>
+            {% if patient is defined %}
+            <p class="pt-4">Bonjour {{ patient.firstname }} !</p>
+            {% endif %}
+        </div>
+        <div class="d-flex justify-content-around my-3 py-3">
+            <a href="{% if patient is defined %} {{ path('dialogue', {'id' : patient.id }) }} {% else %} {{ path('guest_dialogue') }} {% endif %}" class="btn py-3 d-block text-center d-flex px-4">
+                <i class="fas fa-question pe-auto my-auto"></i>
+                <span class="mx-auto">Dialogue</span>
+            </a>
+        </div>
+        <div class="d-flex justify-content-around my-3 py-3">
+            <a href="{% if patient is defined %} {{ path('exchange', {'id' : patient.id }) }} {% else %} {{ path('guest_exchange') }} {% endif %}" class="btn py-3 d-block text-center d-flex px-4">
+                <i class="fas fa-comment-dots pe-auto my-auto"></i>
+                <span class="mx-auto">Echange</span>
+            </a>
+        </div>
+        {#{% if patient is defined %}
+        <div class="d-flex justify-content-around my-3 py-3">
+            <a href="{{ path('audio', {'id' : patient.id }) }}" class="btn py-3 d-block text-center d-flex px-4">
+                <i class="fas fa-volume-up pe-auto my-auto"></i>
+                <span class="mx-auto">Mes Phrases</span>
+            </a>
+        </div>
+        {% endif %}#}
+    </div>
+{% endblock%}

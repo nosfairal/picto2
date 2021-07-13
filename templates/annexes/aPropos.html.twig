@@ -1,0 +1,30 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}A Propos | PictoPicto{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/connexion.css') }}" type="text/css">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid" id="wrapper">
+        <div class="text-center py-4">
+            <a id="logo" href="{{ path('home') }}"><img src="{{ asset('img/LogoEcam.png') }}" alt="PictoPicto">
+            </a>
+        </div>
+        <div class="px-auto text-light text-center">
+            <h2 class="display-6 my-2">Equipe de Développement</h2>
+            <ul class="list-unstyled py-2">
+                <li><strong>Moncef BENKHERRAT (ECAM-EPMI)</strong> : Auteur et Chef de Projet</li>
+                <li><strong>Mustapha YOUNSI</strong> : Responsable Développement Informatique</li>
+                <li><strong>Paloma VACHERON</strong> : Développement Informatique</li>
+                <li><strong>Elodie AGOUTIN</strong> : Développement Informatique</li>
+                <li><strong>François Thialon</strong> : Développement Informatique</li>
+                <li><strong>Pascal LEGENDRE (Bouygues Energies et Services)</strong> : Parrain du Projet</li>
+                <li><strong>Didier BEAUFOL (Association HORS-CADRE)</strong> : Educateur Spécialisé</li>
+            </ul>
+        </div>
+        <div class="mt-5">
+            <a class="text-white" href="{{ path('home') }}">Retour à l'accueil</a>
+        </div>
+    </div>
+{% endblock %}
+

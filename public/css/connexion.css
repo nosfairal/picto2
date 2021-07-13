@@ -1,0 +1,113 @@
+html{
+    height:100%;
+}
+
+body{
+    min-height: 100%;
+    width: 100vw;
+    background-color:#1c6874  !important;
+}
+#logo img {
+    height: 6rem;
+}
+#wrapper{
+    height: 90%;
+}
+.form-control, .form-control-sm, .accordion-item, .form-select {
+    box-shadow: inset -2px -2px 2px #FFFFFF, inset 2px 2px 2px rgba(222,223,224,0.25);
+    border-radius: 10px !important;
+    border: 1px solid rgba(222,223,224,1) !important;
+
+}
+#contentRow{
+    height: 75%;
+}
+/*bouton se connecter*/
+#logIn, .register, .resetPassword{
+    background: #278d9d !important;
+    border-radius: 10px !important;
+    border: none !important;
+    color: #ffffff !important;
+    transition: all 300ms !important;
+}
+
+#logIn:hover, .register:hover, .resetPassword:hover{
+    background-color: #ACE4E7 !important;
+    box-shadow: inset -2px -2px 2px #BDFCFF, inset 2px 2px 2px #99CCCF;
+    color: #17201F !important;
+}
+
+/*div connexion*/
+#connexion, #homeWrapper{
+    padding:4rem;
+    background-color: #F8F9FA !important;
+    box-shadow: 2px 3px 20px 20px rgba(60, 16, 16, 0.14);
+    border-radius: 20px;
+    margin-block: auto;
+}
+
+#guest{
+    padding-left: 2rem;
+    margin-block: auto;
+}
+#guestText{
+    color:#FFFFFF;
+    margin-top:5rem;
+    text-align:center;
+}
+.btnGuest{
+    border-radius: 10px !important;
+    border: none !important;
+    color: #000 !important;
+    transition: all 300ms !important;
+    background-color: #F8F9FA !important;
+}
+.btnGuest:hover{
+    background-color: #ACE4E7 !important;
+    box-shadow: inset -2px -2px 2px #BDFCFF, inset 2px 2px 2px #99CCCF;
+    color: #17201F !important;
+}
+.btnGuest a{
+    text-decoration: none;
+    color:#000000;
+    vertical-align: middle;
+}
+.btnGuest a:hover{
+    color:#000;
+}
+
+footer a{
+    text-decoration: none;
+    color:#FFF;
+}
+footer{
+    position: relative;
+    bottom: 0;
+    left: 5px;
+}
+.bounce{
+    position: relative;
+}
+.bi-arrow-down-circle{
+    position:absolute;
+
+    animation: bounce 0.9s ease infinite;
+}
+@keyframes bounce{
+    from {top: 20px;}
+    50%  {top: 30px;}
+    to   {top: 20px;}
+}
+.guestMobile{
+    background-color:rgba(12, 84, 95, 0.60);
+    border-radius: 0 0 20px 20px;
+    padding:.8rem 2rem 2rem 2rem;
+}
+
+@media(max-width: 767px){
+    #connexion{
+        border-radius: 20px 20px 0 0;
+        padding:4rem 1rem 1rem 1rem;
+    }
+
+}

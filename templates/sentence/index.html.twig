@@ -1,0 +1,57 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}Phrases | PictoPicto{% endblock %}
+
+    {% block content  %}
+        <!-- titre de l'item choisi -->
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        <div class="d-flex justify-content-between">
+            <span class="title">Phrases de {{ patient.firstname }} {{ patient.lastname }}</span>
+            <audio controls src="" id="audio"></audio>
+        </div>
+        <div class="container-fluid mt-3 py-2 px-4 background">
+            <!-- tableau -->
+            <table  class="table mx-auto">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Phrase</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set counter = 1 %}
+                {% for sentence in sentences %}
+                    <tr>
+                        <td>{{ sentence.createdAt|date('d/m/Y')}}</td>
+                        {% if sentence.audio %}
+                            <td><i class="fas fa-file-audio fa-lg "></i>  Fichier audio - n° {{ counter }}</td>
+                            {% set counter = counter + 1 %}
+                        {% else %}
+                            <td>{{ sentence.text }}</td>
+                        {% endif %}
+                        {% if sentence.audio %}
+                            <td>
+                                <a href="{{asset('/audio/' ~ sentence.audio)}}" class="play px-2 mr-2"><i class="fas fa-play-circle "></i></a>
+                                <a href="{{ path('admin_spectrogram', {id: sentence.id}) }}" class="action px-2 mr-2 mt-0"><i class="fab fa-creative-commons-sampling "></i></a>
+                                <form method="post" action="{{ path('admin_audio_delete', {id: sentence.id}) }}" style="display:inline-block" onsubmit="return confirm('Êtes vous sûr de vouloir supprimer cet enregistrement ?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sentence.id) }}">
+                                    <button id="action" class="px-2 border-0 bg-transparent text-danger"><i class="fas fa-trash-alt "></i></button>
+                                </form>
+                            </td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{{ path('patient_profile', { 'id' : patient.id }) }}" class=" fixed-bottom  me-auto ms-4 my-5"><span class="d-md-inline-block d-none btn">Retour au profil de {{ patient.firstname }}</span><span class="d-block d-md-none"><i class="bi bi-arrow-left-circle-fill"></i></span></a>
+    {% endblock %}

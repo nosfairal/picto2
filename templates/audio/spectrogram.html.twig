@@ -1,0 +1,73 @@
+{% extends 'baseTherapist.html.twig' %}
+
+
+{% block title %}Spectrogramme | PictoPicto{% endblock %}
+
+    {% block content  %}
+        <!-- titre de l'item choisi -->
+
+        <div class="d-flex justify-content-between">
+            <span class="title">Spectrogramme de {{ patient.firstname }} {{ patient.lastname }}</span>
+            <a href="{{ path('patient_sentence', {id: patient.id }) }}" class="btn"> <i class="fas fa-reply mx-2"></i> Phrases de {{ patient.firstname }}</a>
+        </div>
+        <div class="container-fluid mt-3 py-2 px-4 background">
+            <!-- spectrogram patient -->
+            <div class="row align-items-center p-2 py-auto mb-3">
+                <div class="col-9 position-relative">
+                    <div id="load_spectro" class="bg-info">
+                        <div id="chargement-patient">
+                            <img class="rotate" src="{{ asset('/img/spectrogramme/loading.svg')}}" alt="load">
+                            <p>Chargement du Spectrogramme...</p>
+                        </div>
+                        <div id="spectrogram" ></div>
+                        <div id="timeline"></div>
+                        <div id="waveform"></div>
+                    </div>
+                </div>
+                <div class="col-3" id="playspectro-patient">
+                    <h5 class="mb-5 font-weight-bold text-center">Spectrogramme du patient</h5>
+                    <div class="d-flex justify-content-around">
+                        <a href="#" id="player-patient" class="btn btn-sm"><i class="fab fa-creative-commons-sampling fa-2x"></i></a>
+                        <a href="#" id="playRecord-patient" class="btn btn-sm"><i class="fas fa-play-circle fa-2x "></i></a>
+                    </div>
+                    <audio  id="audio" src="{{asset('/audio/' ~ sentence.audio)}}"></audio>
+                </div>
+            </div>
+            <!-- end of spectrogram patient -->
+
+            <!-- spectrogram thérapeute -->
+            <div class="row align-items-center p-2 py-auto mb-5">
+                <div class="col-9 position-relative">
+                    <div id="load_spectro" class="bg-info">
+                        <div id="chargement-therapist">
+                            <img class="rotate" src="{{ asset('/img/spectrogramme/loading.svg') }}" alt="load">
+                            <p>Chargement du Spectrogramme...</p>
+                        </div>
+                        <p id="record_voice">
+                            Appuyez sur <a href="" class="btn btn-sm disabled mx-3"><i class="fas fa-microphone fa-2x"></i></a> pour commencer à enregistrer .
+                        </p>
+                        <div id="spectrogram-therapist" ></div>
+                        <div id="timeline-therapist"></div>
+                        <div id="waveform-therapist"></div>
+                    </div>
+                </div>
+                <div class="col-3" id="playspectro-therapist">
+                    <h5 class="mb-5 font-weight-bold text-center">Spectrogramme du Thérapeute</h5>
+                    <div class="d-flex justify-content-around align-items-center">
+                        <a href="#" id="record-therapist" class="btn btn-sm"><i class="fas fa-microphone fa-2x"></i></a>
+                        <a href="#" id="stop" class="btn btn-sm disabled px-1"><i class="fas fa-microphone-slash fa-2x"></i></a>
+                        <a href="#" id="player-therapist" class="btn btn-sm disabled" ><i class="fab fa-creative-commons-sampling fa-2x"></i></a>
+                        <a href="#" id="playRecord-therapist" class="btn btn-sm disabled"><i class="fas fa-play-circle fa-2x"></i></a>
+                    </div>
+                    <div class="text-center mt-5">
+                        <a href="" class="btn w-100">Recharger la page</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- end of spectrogram thérapeute -->
+
+        </div>
+        <a href="{{ path('patient_profile', { 'id' : patient.id }) }}" class=" fixed-bottom  me-auto ms-4 my-5"><span class="d-md-inline-block d-none btn">Retour au profil de {{ patient.firstname }}</span><span class="d-block d-md-none"><i class="bi bi-arrow-left-circle-fill"></i></span></a>
+    {% endblock %}
+

@@ -1,0 +1,21 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}Ajout d'une Observation | PictoPicto{% endblock %}
+
+    {% block content %}
+        <!-- titre de l'item choisi -->
+        <div class="d-flex justify-content-between">
+            <span class="title">Profil de {{ patient.firstname }} {{ patient.lastname }}</span>
+{#            <a href="{{ path('patient_profile', { 'id' : patient.id }) }}" class="btn btn-sm inHeader">Annuler</a>#}
+        </div>
+        <div class="container-fluid mt-3 py-2 px-4 background">
+            <h3 class="mb-2 text-center">Ajouter une observation à {{ patient.firstname }} {{ patient.lastname }}</h3>
+            {{ form_start(form) }}
+            {{ form_row(form.comment) }}
+            <div class="text-end my-4">
+                {{ form_row(form.submit, {'label': 'Ajouter', 'attr': {'hidden': false, 'class': 'btn'}}) }}
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <a href="{{ path('patient_profile', { 'id' : patient.id }) }}" class="btn fixed-bottom d-inline-block me-auto ms-4 my-5">Retour au profil de {{ patient.firstname }}</a>
+    {% endblock %}

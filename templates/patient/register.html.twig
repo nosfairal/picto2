@@ -1,0 +1,38 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}Ajout d'un Patient | PictoPicto{% endblock %}
+
+{% block content %}
+    <!-- titre de l'item choisi -->
+    <span class="title">Vos Patients</span>
+
+    <div class="container-fluid mt-3 px-4 background">
+        {{ form_start(form) }}
+        <div class="row my-2">
+            <div class="col">
+                {{ form_row(form.firstname) }}
+            </div>
+            <div class="col" id="some-custom-id">
+                {{ form_row(form.lastname) }}
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+            {{ form_row(form.birthday) }}
+            </div>
+            <div class="col" id="some-custom-id">
+                {{ form_row(form.schoolGrade) }}
+            </div>
+        </div>
+        <div class="my-2">
+            {{ form_row(form.email) }}
+        </div>
+        <div class="my-2">
+            {{ form_row(form.notes) }}
+        </div>
+        <div class="text-center my-4">
+            {{ form_row(form.submit) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,91 @@
+#load_spectro{
+    background-image: url(../img/spectrogramme/spectrogram.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:340px;
+    width:100%;
+    border: 1px solid black;
+}
+
+#chargement-patient, #chargement-therapist{
+    text-align: center;
+    margin-top: 15%;
+    width: 100%;
+    position: relative;
+}
+
+#chargement-patient img, #chargement-therapist img{
+    height: 60px;
+    width: 60px;
+}
+
+#chargement-patient > p, #chargement-therapist > p{
+    color: #E47E5B;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#timeline, #timeline-therapist{
+    margin-bottom: 2%;
+}
+
+#record-therapist {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+#record_voice{
+    text-align: center;
+    margin-top: 17%;
+    width: 100%;
+}
+
+#record_voice > a {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+#wave_canvas{
+    text-align: center;
+    margin-top: 8%;
+}
+
+
+
+#playRecord-patient:hover, #player-patient:hover, #playRecord-therapist:hover, #player-therapist:hover, #record-therapist:hover, #stop:hover{
+    transition: 0.5s;
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+    color: black !important;
+}
+
+#playRecord-patient:active, #player-patient:active, #playRecord-therapist:active, #player-therapist:active, #record-therapist:active, #stop:active{
+    transition: 0.5s;
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+    color: #ACE4E7 !important;
+}
+
+
+.spectro{
+    position: relative;
+}
+.rotate {
+    -webkit-animation: spin .9s infinite linear;
+    animation: spin .9s infinite linear;
+}
+@-webkit-keyframes spin {
+    100% { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    100% { -moz-transform: rotate(360deg); }
+}
+@keyframes spin {
+    100% {
+        -moz-transform:rotate(360deg);
+        -o-transform:rotate(360deg);
+        transform:rotate(360deg);
+    }
+}

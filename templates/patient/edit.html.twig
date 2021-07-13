@@ -1,0 +1,43 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}Modification du Profil de {{ patient.firstname }} | PictoPicto{% endblock %}
+
+    {% block content %}
+        <!-- titre de l'item choisi -->
+        <div class="d-flex justify-content-between">
+            <span class="title">Profil de {{ patient.firstname }} {{ patient.lastname }}</span>
+            <a href="{{ path('patient_profile', { 'id' : patient.id }) }}" class="btn btn-sm inHeader">Annuler</a>
+        </div>
+        <div class="container-fluid mt-3 py-2 px-4 background">
+            <table class="table mx-auto">
+                <tbody>
+                {{ form_start(form) }}
+                <tr>
+                    <th>Nom</th>
+                    <td class="text-end">{{ form_row(form.lastname, {'label_attr': {'class': 'd-none'}, 'attr': {'class': 'form-control-sm'}}) }}</td>
+                </tr>
+                <tr>
+                    <th>Prénom</th>
+                    <td class="text-end">{{ form_row(form.firstname, {'label_attr': {'class': 'd-none'}, 'attr': {'class': 'form-control-sm'}}) }}</td>
+                </tr>
+                <tr>
+                    <th>Date de Naissance</th>
+                    <td class="text-end">{{ form_row(form.birthday, {'label_attr': {'class': 'd-none'}, 'attr': {'class': 'form-control-sm'}})}}</td>
+                </tr>
+                <tr>
+                    <th>Scolarité</th>
+                    <td class="text-end">{{ form_row(form.schoolGrade, {'label_attr': {'class': 'd-none'}, 'attr': {'class': 'form-control-sm'}}) }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td class="text-end">{{ form_row(form.email, {'label_attr': {'class': 'd-none'}, 'attr': {'class': 'form-control-sm'}}) }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="text-end my-4">
+                {{ form_row(form.submit, {'label': 'Modifier le Profil'}) }}
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <a href="{{ path('patient_profile', { 'id' : patient.id }) }}" class="btn fixed-bottom d-inline-block me-auto ms-4 my-5">Retour au profil de {{ patient.firstname }}</a>
+    {% endblock %}

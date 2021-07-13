@@ -1,0 +1,44 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}Mon Espace | PictoPicto{% endblock %}
+
+    {% block content %}
+        <!-- titre de l'item choisi -->
+        <span class="title">Bienvenue {{ app.user.firstName }} {{ app.user.lastName }} !</span>
+        <div class="container-fluid my-3 p-4 background">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <table class="table mx-auto">
+
+                <tbody class="row">
+                <tr class="col-12 col-md-6">
+                    <th>Nom</th>
+                    <td class="text-end">{{ app.user.firstName }}</td>
+                </tr>
+                <tr class="col-12 col-md-6">
+                    <th>Prénom</th>
+                    <td class="text-end">{{ app.user.lastName }}</td>
+                </tr>
+                <tr class="col-12 col-md-6">
+                    <th>Fonction</th>
+                    <td class="text-end">{{ app.user.job }}</td>
+                </tr>
+                <tr class="col-12 col-md-6">
+                    <th>Institution</th>
+                    <td class="text-end">{{ app.user.institution.name }}</td>
+                </tr>
+                <tr class="col-12">
+                    <th>Email</th>
+                    <td class="text-end">{{ app.user.email }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="text-end mt-5">
+                <a href="{{ path('admin_edit') }}" class="btn btn-sm d-none d-md-inline">Modifier mon profil</a>
+            </div>
+        </div>
+    {% endblock %}

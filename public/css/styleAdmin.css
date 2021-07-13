@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Magra&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #F8F9FA !important;
+    color: #17201F !important;
+    font-family: 'Magra', sans-serif !important;
+    /*position: relative;*/
+    min-height: 100%;
+}
+
+#footer {
+    margin-top: 15rem;
+    font-size: .8rem;
+}
+
+/* Logo */
+#logo img {
+    height: 6rem;
+}
+
+/*.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-y: auto;
+}*/
+
+/* Pages Title */
+.title {
+    color:#6f6d75;
+    font-size: 1.5rem !important;
+    font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+/* Menu */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* derrière la navbar */
+    padding: 60px 0 0; /* Height navbar */
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color:#333;
+}
+
+.sidebar .nav-link.active {
+    color:#636dfd;
+}
+
+/* elements de la page*/
+.bi-search {
+    color:#fff;
+}
+
+.background {
+    background-color: rgba(255,255,255, 0.5);
+    box-shadow: inset 5px 5px 5px #FFFFFF, inset -5px -5px 5px rgba(222,223,224,0.25);
+    /*margin-top: .8rem;
+    margin-right: 3rem;
+    padding:1rem;*/
+    border-radius: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    border-left: 1px solid rgba(255, 255, 255, 0.35);
+    border-bottom: 1px solid rgba(222, 223, 224, 0.35);
+    border-right: 1px solid rgba(222, 223, 224, 0.35);
+
+
+}
+
+caption {
+    caption-side:top;
+    text-align: center;
+}
+
+a {
+    color: #17201F !important;
+}
+a:hover{
+    color: #E47E5B !important;
+}
+a.active {
+
+    color: #E47E5B !important;
+}
+
+/***************** liste*/
+ul {
+
+    list-style-type: none;
+}
+
+/*.background ul li {*/
+/*    display:none;*/
+/*}*/
+
+
+.pictoList {
+
+    height:5rem;
+    width:5rem;
+    margin:.5rem;
+    border-radius: 20px;
+}
+
+.pic{
+    width: 6rem;
+}
+.picText{
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+.bi-x {
+    color:#5c5c61;
+    font-size: 1.5rem;;
+    padding:.2rem;
+    margin: 2rem;
+}
+
+.btn{
+    background: #17201F !important;
+    box-shadow: inset 5px 5px 5px #2D3E3C, inset -5px -5px 5px #000000;
+    border-radius: 10px !important;
+    border: none !important;
+    color: #F8F9FA !important;
+    transition: all 300ms !important;
+}
+
+.btn:hover, .accordion-item:hover {
+    background-color: #ACE4E7 !important;
+    box-shadow: inset -2px -2px 2px #BDFCFF, inset 2px 2px 2px #99CCCF;
+    color: #17201F !important;
+}
+
+.btn.inHeader {
+    opacity: 80% !important;
+    /*font-size: 0.8rem;*/
+}
+.btn.inHeader:hover {
+    background-color: #E47E5B !important;
+    box-shadow: inset -2px -2px 2px #FFB38D, inset 2px 2px 2px #A64A2B;
+    color: #F8F9FA !important;
+}
+
+#searchInput .btn {
+    border-radius: 0 10px 10px 0 !important;
+}
+
+#searchInput .form-control {
+    border-radius: 10px 0 0 10px !important;
+}
+
+#homeWrapper {
+    background-color: rgba(255,255,255, 0.5);
+    box-shadow: inset 5px 5px 5px #FFFFFF, inset -5px -5px 5px rgba(222,223,224,0.25);
+    border-radius: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    border-left: 1px solid rgba(255, 255, 255, 0.35);
+    border-bottom: 1px solid rgba(222, 223, 224, 0.35);
+    border-right: 1px solid rgba(222, 223, 224, 0.35);
+}
+
+.form-control, .form-control-sm, .accordion-item, .form-select {
+    box-shadow: inset -2px -2px 2px #FFFFFF, inset 2px 2px 2px rgba(222,223,224,0.25);
+    border-radius: 10px !important;
+    border: 1px solid rgba(222,223,224,1) !important;
+
+}
+
+.fixed-bottom{
+    font-size: 0.8rem !important;
+    width: 8rem;
+}
+
+/* Accordion Icons */
+
+.accordion-item .bi-plus {
+    position: relative;
+    left: 90%;
+    margin: auto 0;
+    font-size: 2rem;
+    /*transition: all 500ms;*/
+}
+/*.accordion-item:hover .fa-plus {
+    transform: scale(1.2);
+}*/
+.accordion-item .bi-dash {
+    position: relative;
+    left: 90%;
+    margin: auto 0;
+    font-size: 2rem;
+    /*transition: all 500ms;*/
+}
+
+/*.accordion-item:hover .fa-minus {
+    transform: scale(1.2);
+}*/
+.buttonDelete {
+    margin-left: 0.5rem;
+    background-color: #E47E5B;
+    border-radius: 50%;
+    border-style: none;
+    font-size: 0.7rem;
+    color: ivory;
+    text-align: right;
+}
+
+/*i {*/
+/*    color: #E47E5B;*/
+/*}*/
+
+@media (max-width: 750px) {
+    .pictoList {
+
+        height:4rem;
+        width:4rem;
+        margin:.1rem;
+        border-radius: 20px;
+    }
+    .accordion-item .bi-dash, .accordion-item .bi-plus{
+        display: none;
+    }
+    .title{
+        font-size:1.1rem !important;
+    }
+    #footer, .block{
+        display: none !important;
+    }
+    #logo img{
+        height: 4rem;
+    }
+    body{
+        font-style: normal !important;
+    }
+}
+

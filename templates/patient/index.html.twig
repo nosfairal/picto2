@@ -1,0 +1,58 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}Liste des Patients{% endblock %}
+
+{% block content %}
+            <!-- titre de l'item choisi -->
+            <span class="title">Vos Patients</span>
+
+    <div class="d-flex justify-content-between">
+                <div class="row gx-0">
+                    <div class="col-12 col-lg-12 p-0">
+                        <!-- barre de recherche -->
+                        <div class="input-group" id="searchInput">
+                            {{ form_start(form) }}
+                            <div class="d-flex">
+                                {{ form_row(form.string) }}
+                                {{ form_row(form.submit) }}
+                            </div>
+                            {{ form_end(form) }}
+                            {#<input class="form-control" type="search" placeholder="Rechercher">
+                            <button class="btn" type="submit"><i class="bi bi-search"></i></button>#}
+                        </div>
+                    </div>
+                </div>
+        <!-- btn création patient -->
+        <div class="d-none d-md-block">
+            <a href="{{ path('patient_register') }}" class="btn btn-dark btn-sm">Créer un patient</a>
+        </div>
+
+    </div>
+    <div class="container-fluid mt-3 px-4 background">
+        {% if patients|length >= 1 %}
+                <!-- tableau -->
+                <table class="table mx-auto">
+                    <thead>
+                    <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th class="block">Email</th>
+                    <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.lastname }}</td>
+                        <td>{{ patient.firstname }}</td>
+                        <td class="block">{{ patient.email }}</td>
+                        <td><a href="{{ path('patient_profile', { 'id' : patient.id }) }}" class="text-body" title="Voir le profil de {{ patient.firstname }}"><i class="bi bi-arrow-right-circle-fill"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+        {% else %}
+        <p class="my-2 py-2">Aucun patient enregistré</p>
+        {% endif %}
+            </div>
+{% endblock %}

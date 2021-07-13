@@ -1,0 +1,110 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}Création d'un Pictogramme | PictoPicto{% endblock %}
+
+{% block content %}
+    <!-- titre de l'item choisi -->
+    <span class="title">Ajout d'un Pictogramme</span>
+    {% for message in app.flashes('echec') %}
+      <div class="alert alert-danger">
+        {{ message }}
+      </div>
+    {% endfor %}
+    {% if not form.vars.valid %}
+        <ul class="alert alert-danger">
+            {# on affiche en premier les erreurs globales (cas classiques) #}
+            {% for error in form.vars.errors %}
+                <li>{{error.message}}</li>
+            {% endfor %}
+            {# ainsi que les erreurs concernant chaque champs #}
+            {% for child in form.children %}
+                {# si le champ à des erreur #}
+                {% if child.vars.errors is defined %}
+                    {% for error in child.vars.errors %}
+                        <li> {{error.message}} </li> {# on ajoute le label du champ devant l'erreur pour plus de précisions. #}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="container-fluid mt-3 px-4 background">
+        <p class="pt-4">
+            PictoPicto vous laisse l'opportunité de créer vos propres pictogrammes!<br/>
+            Pour une meilleure expérience utilisateur, il est recommandé de remplir tous les champs qui se rapporteraient au mot à insérer.
+        </p>
+        <div class="py-1">
+            {{ form_start(form) }}
+            <div class="row my-2">
+                <div class="col">
+                    {{ form_label(form.name) }}{{ form_widget(form.name) }}
+                </div>
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.illustration) }}{{ form_widget(form.illustration) }}
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.category) }}{{ form_widget(form.category) }}
+                </div>
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.genre) }}{{ form_widget(form.genre) }}
+                </div>
+            </div>
+
+            <div class="row my-2">
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.pluriel) }}{{ form_widget(form.pluriel) }}
+                </div>
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.prem_pers_sing) }}{{ form_widget(form.prem_pers_sing) }}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.deux_pers_sing) }}{{ form_widget(form.deux_pers_sing) }}
+                </div>
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.trois_pers_sing) }}{{ form_widget(form.trois_pers_sing) }}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.prem_pers_plur) }}{{ form_widget(form.prem_pers_plur) }}
+                </div>
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.deux_pers_plur) }}{{ form_widget(form.deux_pers_plur) }}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.trois_pers_plur) }}{{ form_widget(form.trois_pers_plur) }}
+                </div>
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.masculin_sing) }}{{ form_widget(form.masculin_sing) }}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.masculin_plur) }}{{ form_widget(form.masculin_plur) }}
+                </div>
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.feminin_sing) }}{{ form_widget(form.feminin_sing) }}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.feminin_plur) }}{{ form_widget(form.feminin_plur) }}
+                </div>
+                <div class="col" id="some-custom-id">
+                    {{ form_label(form.participe) }}{{ form_widget(form.participe) }}
+                </div>
+            </div>
+
+            <div class="text-center my-4">
+                {{ form_row(form.submit) }}
+            </div>
+            {{ form_end(form) }}
+        </div>
+        </div>
+
+{% endblock %}

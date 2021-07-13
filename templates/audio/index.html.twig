@@ -1,0 +1,18 @@
+{% extends 'basePatient.html.twig' %}
+
+{% block title %}Mes Phrases | PictoPicto{% endblock %}
+
+{% block content %}
+    <div id="audioWrapper" class="container col-11 my-5 p-5 text-center">
+        <h2>Mes Phrases</h2>
+        <div class="listenAudio py-4 d-flex">
+            <span>Phrase</span>
+            <div class="ms-auto">Audio</div>
+        </div>
+    </div>
+{% endblock %}
+
+    {% block commands %}
+        {% block menu %}
+            {% endblock %}
+    {% endblock %}

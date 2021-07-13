@@ -1,0 +1,47 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}Profil de {{ patient.firstname }} | PictoPicto{% endblock %}
+
+    {% block content %}
+        <!-- titre de l'item choisi -->
+        <span class="title">Profil de {{ patient.firstname }} {{ patient.lastname }}</span>
+        <div class="container-fluid mt-3 py-4 px-4 background">
+            <div class="row py-2 mb-5 border-bottom">
+                <div class="col-12 col-md-4 my-2">
+                    <span>Né(e) le {{ patient.birthday | date("d/m/Y", "Europe/Paris") }}</span>
+                </div>
+                <div class="col-12 col-md-4 my-2">
+                    <span>Scolarité: {{ patient.schoolGrade }}</span>
+                </div>
+                <div class="col-12 col-md-4 my-2">
+                    <span>Email: {{ patient.email }}</span>
+                </div>
+            </div>
+                <div class="row my-5">
+                    <div class="col-12 col-md-6">
+                        <span>Phrases déjà réalisées: {{ sentence|length }}</span> <br>
+                        <span>Evaluation initiale: {{ note.comment }}</span>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-center my-auto  d-none d-md-block">
+                            <a href="{{ path('user_menu', {'id' : patient.id }) }}" class="btn btn-lg">Démarrer la séance avec {{ patient.firstname }} !</a>
+                        </div>
+                    </div>
+
+                </div>
+                 <div class="row mt-5 border-top justify-content-around">
+                    <div class="col-12 col-md-4 my-2">
+                        <a href="{{ path('patient_sentence', { 'id' : patient.id }) }}" class="my-4 text-decoration-none "><i class="bi bi-chat-left-dots-fill"></i> Phrases de {{ patient.firstname }}</a>
+                    </div>
+                    <div class="col-12 col-md-4 my-2">
+                        <a href="{{ path('patient_note', { 'id' : patient.id }) }}" class="my-4 text-decoration-none"><i class="bi bi-card-text"></i> Observations</a>
+                    </div>
+                    <div class="d-none d-md-block col-md-4 my-2">
+                        <a href="{{ path('patient_edit', { 'id' : patient.id }) }}" class="my-4 text-decoration-none"><i class="bi bi-pencil-square"></i> Modifier le Profil</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    {% endblock %}

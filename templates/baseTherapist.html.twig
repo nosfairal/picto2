@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styleAdmin.css')}}">
+    <link rel="stylesheet" href="{{asset('css/spectrogram.css')}}">
+{% endblock %}
+
+{% block body  %}
+    <!-- header avec logo et déconnexion -->
+    <header class="navbar pb-5">
+        <a id="logo" class="navbar-brand px-3 text-body w-25" href="{% if app.user %}{{ path('admin') }}{% else %}{{ path('home') }}{% endif %}"><img src="{{ asset('img/LogoEcam.png') }}" alt="Ecam">
+        </a>
+        <ul class="navbar-nav px-3 ms-auto">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link text-body" href="{{ path('app_logout') }}">{{ app.user.email}} <i class="bi bi-power"></i></a>
+            </li>
+        </ul>
+    </header>
+    <!-- sidebar -->
+    <main class="row gx-0 container-fluid mb-5">
+    <aside class="col-2 col-lg-1 me-2">
+        <div class="row">
+            <nav  class="col-md-2">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.get('_route') == 'admin' %}active{% endif %}" href="{{ path('admin') }}">
+                                <i class="bi bi-house-fill pe-2"></i>
+                                <span class="d-none d-md-inline">Accueil</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.get('_route') == 'patient' %}active{% endif %}" href="{{ path('patient') }}">
+                                <i class="bi bi-person-fill pe-2"></i>
+                                <span class="d-none d-md-inline">Patients</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-nowrap {% if app.request.get('_route') == 'category' %}active{% endif %}" href="{{ path('category') }}">
+                                <i class="bi bi-puzzle-fill pe-2 align-top "></i>
+                                <span class="d-none d-md-inline-block text-wrap">Catégories & Pictogrammes</span>
+                            </a>
+                        </li>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link text-nowrap {% if app.request.get('_route') == 'institution_index' %}active{% endif %}" href="{{ path('institution_index') }}">
+                                <i class="bi bi-building pe-2 align-top"></i>
+                                <span class="d-none d-md-inline-block text-wrap">Entreprises et Institutions</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div id="footer" class="d-flex justify-content-center my-4 flex-wrap flex-md-nowrap fixed-bottom ms-4">
+            <a class="me-2 text-nowrap" href="#">Mentions Légales </a>
+{#            <a class="ms-2 text-nowrap" href="#">Contact</a>#}
+        </div>
+    </aside>
+    <!-- main -->
+    <div id="content" class="container-fluid col-9 mx-auto">
+        {% block content %}
+        {% endblock %}
+    </div>
+    </main>
+
+{% endblock %}
+                {# js carousel, drag and drop, jquery#}
+{% block script %}
+    <script src="{{ asset('js/jquery-3.6.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.ui.touch-punch.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/accordion.js') }}"></script>
+    <script src="{{ asset('js/audio/audio.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/audio/recorder.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/audio/Fr.voice.js') }}"></script>
+    <script type="text/javascript" type="text/javascript" src="{{ asset('/js/spectrogramme/wavesurfer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/spectrogramme/wavesurfer.spectrogram.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/spectrogramme/wavesurfer.timeline.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/spectrogramme/time_interval.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/spectrogramme/spectrogram_patient.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/spectrogramme/spectrogram_therapeute.js') }}"></script>
+{% endblock %}
