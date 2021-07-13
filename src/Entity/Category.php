@@ -25,22 +25,27 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("pictogram")
      * @Groups("category")
+     * @Groups("pictogram")
+     * @Groups("subcategory")
+     
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("pictogram")
      * @Groups("category")
+     * @Groups("pictogram")
+     * @Groups("subcategory")
+     
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("pictogram")
      * @Groups("category")
+     * @Groups("pictogram")
+     * @Groups("subcategory")
      */
     private $filename;
 
@@ -76,10 +81,16 @@ class Category
      */
     private $therapist;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SubCategory::class, mappedBy="category_id", orphanRemoval=true)
+     */
+    private $subCategories;
+
     public function __construct()
     {
         $this->pictograms = new ArrayCollection();
         $this->questions = new ArrayCollection();
+        $this->subCategories = new ArrayCollection();
     }
 
     public function __toString(): ?string
@@ -237,6 +248,36 @@ class Category
     public function setTherapist($therapist)
     {
         $this->therapist = $therapist;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SubCategory[]
+     */
+    public function getSubCategories(): Collection
+    {
+        return $this->subCategories;
+    }
+
+    public function addSubCategory(SubCategory $subCategory): self
+    {
+        if (!$this->subCategories->contains($subCategory)) {
+            $this->subCategories[] = $subCategory;
+            $subCategory->setCategoryId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubCategory(SubCategory $subCategory): self
+    {
+        if ($this->subCategories->removeElement($subCategory)) {
+            // set the owning side to null (unless already changed)
+            if ($subCategory->getCategoryId() === $this) {
+                $subCategory->setCategoryId(null);
+            }
+        }
 
         return $this;
     }

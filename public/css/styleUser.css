@@ -124,14 +124,16 @@ body {
     /* Base */
 /* Carousel */
 .wrapperP,
-.wrapperC {
+.wrapperC,
+.wrapperSCP {
     width: 100%;
     position: relative;
     overflow: hidden;
 }
 
 .carouselC,
-.carouselP {
+.carouselP,
+.carouselSCP {
     overflow: hidden;
     scroll-behavior: smooth;
 }
@@ -140,7 +142,9 @@ body {
 .prevC,
 .nextC,
 .prevP,
-.nextP {
+.nextP,
+.nextSCP,
+.prevSCP {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -154,20 +158,23 @@ body {
 
 /* Position Boutons "Précédent" */
 .prevC,
-.prevP {
+.prevP,
+.prevSCP {
     top: 35%;
     left: 0;
 }
 
 /* Position Boutons "Suivant" */
 .nextC,
-.nextP {
+.nextP,
+.nextSCP {
     top: 35%;
     right: 0;
 }
 
 .contentC,
-.contentP {
+.contentP,
+.contentSCP {
     display: grid;
     grid-gap: 20px;
     grid-auto-flow: column;
@@ -214,6 +221,15 @@ body {
     z-index: 999;
 }*/
 
+/* Sous-Catégories */
+.sous-categorie img{
+    height: 7rem !important;
+    width: 7rem !important;
+    border-radius: .9rem;
+    display: inline-block;
+    box-shadow: 3px 3px 5px rgb(21 55 60 / 50%);
+}
+
 /* Pictogrammes */
 .picto img,
 .drag,
@@ -242,6 +258,7 @@ body {
 
 /* Désactivation du drag des Catégories */
 .wrapperC,
+.wrapperSCP,
 #static img {
     user-drag: none;
     user-select: none;
@@ -249,6 +266,16 @@ body {
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+
+/* Position Pictogramme fixe */
+.pictoPosition{
+    position: static !important;
+}
+
+/* Position Pictogramme entrain d'être déplacé */
+.pictoAbsolute{
+    position: absolute !important;
 }
 
 /*#picto-wrapper #strict .picto img{*/

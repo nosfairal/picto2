@@ -34,8 +34,9 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="text-end my-4">
+            <div class="flex-end my-4">
                 {{ form_row(form.submit, {'label': 'Modifier le Profil'}) }}
+                <a href="{{ path('delete_patient', { 'id' : patient.id }) }}" class="btn btn-sm d-none d-md-inline ms-4 py-2 px-°3">Supprimer le profil de {{ patient.firstname }}</a>
             </div>
             {{ form_end(form) }}
         </div>

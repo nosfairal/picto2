@@ -2,7 +2,7 @@ var audio = $('#audio').attr('src');
 
 var wavesurfer = WaveSurfer.create({
     container: "#waveform",
-    barHeight: 2,
+    barHeight: 6,
     barGap: 6,
     partialRender: true,
     scrollParent: true,
@@ -39,7 +39,7 @@ function wavesurferPatient(file) {
   rawFile.onload = function () {
     blob = rawFile.response;
     try {
-      $('wave').css("height", "64px");
+      $('wave').css("height", "256px");
       wavesurfer.loadBlob(blob);
       setTimeout(function () {
           $("#chargement-patient").hide();

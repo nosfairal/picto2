@@ -47,4 +47,14 @@ class NoteRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findPatient($id)
+    {
+        return $this->createQueryBuilder('note')
+            ->andWhere('note.therapist IN (:id)')
+            ->setParameter('id', '%'.$id.'%')
+            ->getQuery()
+
+        ;
+    }
 }

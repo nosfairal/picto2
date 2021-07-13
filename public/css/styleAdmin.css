@@ -249,3 +249,9 @@ ul {
     }
 }
 
+.flex-end{
+    display:flex !important;
+    flex-direction:row !important;
+    justify-content: flex-end !important;
+    flex-wrap:nowrap;
+}

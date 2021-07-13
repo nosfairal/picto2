@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Pictogram;
 use App\Entity\Category;
+use App\Entity\SubCategory;
 use App\Entity\Therapist;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -58,9 +59,18 @@ class CreatePictogramType extends AbstractType
                     ],
                   ])
             ->add('category', EntityType::class, [
-                'label' => 'Catégorie du nouveau pictogramme*:',
-                'required' => true,
+                'label' => 'Catégorie du nouveau pictogramme :',
+                'required' => false,
                 'class' => Category::class,
+                'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'form-select'
+                ],
+            ])
+            ->add('subcategory_id', EntityType::class, [
+                'label' => 'Sous-Catégorie du nouveau pictogramme :',
+                'required' => false,
+                'class' => SubCategory::class,
                 'choice_label' => 'name',
                 'attr' => [
                     'class' => 'form-select'

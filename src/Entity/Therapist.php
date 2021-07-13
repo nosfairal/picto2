@@ -72,11 +72,17 @@ class Therapist implements UserInterface
      */
     private $notes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SubCategory::class, mappedBy="therapist_id")
+     */
+    private $subCategories;
+
     public function __construct()
     {
         $this->notes = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->pictograms = new ArrayCollection();
+        $this->subCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -300,6 +306,36 @@ class Therapist implements UserInterface
             // set the owning side to null (unless already changed)
             if ($pictogram->getTherapist() === $this) {
                 $pictogram->setTherapist(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SubCategory[]
+     */
+    public function getSubCategories(): Collection
+    {
+        return $this->subCategories;
+    }
+
+    public function addSubCategory(SubCategory $subCategory): self
+    {
+        if (!$this->subCategories->contains($subCategory)) {
+            $this->subCategories[] = $subCategory;
+            $subCategory->setTherapistId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubCategory(SubCategory $subCategory): self
+    {
+        if ($this->subCategories->removeElement($subCategory)) {
+            // set the owning side to null (unless already changed)
+            if ($subCategory->getTherapistId() === $this) {
+                $subCategory->setTherapistId(null);
             }
         }
 

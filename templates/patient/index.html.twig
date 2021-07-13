@@ -5,6 +5,11 @@
 {% block content %}
             <!-- titre de l'item choisi -->
             <span class="title">Vos Patients</span>
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
 
     <div class="d-flex justify-content-between">
                 <div class="row gx-0">
@@ -42,12 +47,15 @@
                     </thead>
                     <tbody>
                     {% for patient in patients %}
-                    <tr>
-                        <td>{{ patient.lastname }}</td>
-                        <td>{{ patient.firstname }}</td>
-                        <td class="block">{{ patient.email }}</td>
-                        <td><a href="{{ path('patient_profile', { 'id' : patient.id }) }}" class="text-body" title="Voir le profil de {{ patient.firstname }}"><i class="bi bi-arrow-right-circle-fill"></i></a></td>
-                    </tr>
+                        {% if 'Patient désactivé numéro' in patient.email %} 
+                        {% else %}
+                            <tr>
+                                <td>{{ patient.lastname }}</td>
+                                <td>{{ patient.firstname }}</td>
+                                <td class="block">{{ patient.email }}</td>
+                                <td><a href="{{ path('patient_profile', { 'id' : patient.id }) }}" class="text-body" title="Voir le profil de {{ patient.firstname }}"><i class="bi bi-arrow-right-circle-fill"></i></a></td>
+                            </tr>
+                        {% endif %}
                     {% endfor %}
                     </tbody>
                 </table>

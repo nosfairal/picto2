@@ -5,16 +5,19 @@ namespace App\Controller\Admin;
 use App\Classe\Search;
 use App\Entity\Note;
 use App\Entity\Patient;
+use App\Form\DeletePatient;
 use App\Form\EditPatientType;
 use App\Form\PatientRegisterType;
 use App\Form\SearchType;
 use App\Repository\NoteRepository;
+use App\Repository\PatientRepository;
 use App\Repository\SentenceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class PatientController extends AbstractController
     /**
@@ -137,4 +140,40 @@ class PatientController extends AbstractController
             'patient' => $patient
         ]);
     }
+    /**
+     * @Route("/suppression-du-patient/{id}", name="delete_patient")
+     */
+
+    public function deletePatient(Request $request, UserPasswordEncoderInterface $encoder, PatientRepository $patientRepository, $id){
+
+        $notificationWarning = null;
+        $notificationSuccess=null;
+        $therapist = $this->getUser();
+        $patient = $patientRepository->find($id);
+
+        $form = $this->createForm(DeletePatient::class, $therapist);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $oldPassword = $form->get('Password')->getData();
+            if ($encoder->isPasswordValid($therapist, $oldPassword)) {
+                $patient->setEmail('Patient désactivé numéro ' . $id);
+                $patient->setFirstName('Patient désactivé numéro ' . $id);
+                $patient->setLastName('Patient désactivé numéro ' . $id);
+                $this->entityManager->flush();
+                $this->addFlash('success', 'Patient supprimé avec succès');
+                return $this->redirectToRoute('patient');
+            } else {
+                $notificationWarning = "Le mot de passe est incorrect.";
+            }
+        }
+        return $this->render('patient/deletePatient.html.twig', [
+            'form' => $form->createView(),
+            'notificationSuccess' => $notificationSuccess,
+            'notificationWarning' =>$notificationWarning,
+            'patient' => $patient
+        ]);
+    }
+
 }
