@@ -54,6 +54,7 @@ $("#drop .drop").droppable({
         $(".wrapperP").droppable({
             // Il n'accepte que les pictogrammes qui ont déjà été droppé
             accept: ".droppedPicto",
+            tolerance: "fit",
             drop: function (ev, ui) {
                 let draggableElement = $(ui.helper); // Clone du pictogramme draggé
                 let droppedOn = $(this);

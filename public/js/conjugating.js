@@ -145,8 +145,10 @@ function parcoursJSONPlur(jsonObj) {
         let femininSing = jsonObj[i]['feminin_sing'];       // le féminin singulier
         let femininPlur = jsonObj[i]['feminin_plur'];       // le féminin pluriel
 
+
+
         /* Pluriel */
-        if (sentenceToConjug.text().includes("des") || sentenceToConjug.text().includes("Des") || sentenceToConjug.text().includes("mes") || sentenceToConjug.text().includes("Mes") || sentenceToConjug.text().includes("tes") || sentenceToConjug.text().includes("Tes") || sentenceToConjug.text().includes("ses") || sentenceToConjug.text().includes("Ses") || sentenceToConjug.text().includes("/^les$/") || sentenceToConjug.text().includes("Les") || sentenceToConjug.text().includes("ces") || sentenceToConjug.text().includes("Ces")) { // pluriel
+        if (sentenceToConjug.text().includes(" des ") || sentenceToConjug.text().includes("Des ") || sentenceToConjug.text().includes(" mes ") || sentenceToConjug.text().includes("Mes ") || sentenceToConjug.text().includes(" tes ") || sentenceToConjug.text().includes("Tes ") || sentenceToConjug.text().includes(" ses ") || sentenceToConjug.text().includes("Ses ") || sentenceToConjug.text().includes(" les ") || sentenceToConjug.text().includes("Les ") || sentenceToConjug.text().includes(" ces ") || sentenceToConjug.text().includes("Ces ")) { // pluriel
             // console.log("Cette phrase contient un determinant du pluriel")
             if (sentenceToConjug.text().includes(name)[gender] === "féminin" && femininPlur !== null) {
                 femPlur = true;
@@ -154,7 +156,7 @@ function parcoursJSONPlur(jsonObj) {
                 mascPlur = true;
             }
             if (pluriel !== null) { // Si le mot peut s'accorder au pluriel
-                if (sentenceToConjug.text().includes(name)) {
+                if (sentenceToConjug.text().includes(" " + name + " ") || sentenceToConjug.text().includes("'" + name + " ")) {
                     sentenceToConjug.text(sentenceToConjug.text().replace(name, pluriel));
                 }
             }
