@@ -103,7 +103,7 @@
                                                                         <div class="text-center pic ms-md-5">
                                                                             <img class="pictoList"src="{{ asset('images/pictograms/') }}{{ pic.filename }}" alt="">
                                                                             <figcaption class="picText">{{ pic.name }}
-                                                                                {% if pic.therapist == null %}
+                                                                                {% if pic.therapist != null %}
                                                                                     <form method="post"
                                                                                         action="{{ path('admin.pictogram.delete', {id: pic.id}) }}"
                                                                                         style="display: inline-block;"

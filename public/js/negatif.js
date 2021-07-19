@@ -111,7 +111,7 @@ function parcoursJSONNeg(jsonObj) {
                         }
                     }
                 }
-            } else if (sentenceToConjug.text().includes("il") || sentenceToConjug.text().includes("Il") || sentenceToConjug.text().includes("elle") || sentenceToConjug.text().includes("Elle")) {
+            } else {
                 if (troisPersSing !== null) { // Conjugaison à la troisième personne du singulier
                     if (sentenceToConjug.text().includes(name)) {
                         phrase.push(name);
