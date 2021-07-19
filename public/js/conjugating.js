@@ -42,9 +42,11 @@ function getResponseConj(){
 
 /* Parcours Objets Pictogramme à Conjuguer */
 function parcoursJSONConj(jsonObj) {
+    let phrase = [];
+
     // word = sentenceToConjug.text().split(' ');
     for(let i = 0; i< jsonObj.length; i++) {
-        let name = jsonObj[i]['name'].toLowerCase();        // Renvoie le nom,
+        let name = jsonObj[i]['name'].toLowerCase();        // Renvoie le nom,       
         let premPersSing = jsonObj[i]['prem_pers_sing'];    // la première personne du singulier,
         let deuxPersSing = jsonObj[i]['deux_pers_sing'];    // la deuxième,
         let troisPersSing = jsonObj[i]['trois_pers_sing'];  // la troisième,
@@ -55,52 +57,72 @@ function parcoursJSONConj(jsonObj) {
         // Si la valeur du champs participe du pictogramme n'est pas égale à null
 
             /* Conjugaison */
-        if ((premPersSing === name.substring(0, name.length-1)) || (!sentenceToConjug.text().includes(premPersSing) && !sentenceToConjug.text().includes(deuxPersSing) && !sentenceToConjug.text().includes(troisPersSing) && !sentenceToConjug.text().includes(premPersPlur) && !sentenceToConjug.text().includes(deuxPersPlur) && !sentenceToConjug.text().includes(troisPersPlur))) {
-            console.log()
+        if ((premPersSing === name.substring(0, name.length-1)) || (name == 'avoir') || (name == 'descendre') || (name == 'se moucher') || (name == "s'habiller") || (name == "se déshabiller") || (name == 'mettre') || (!sentenceToConjug.text().includes(premPersSing) && !sentenceToConjug.text().includes(deuxPersSing) && !sentenceToConjug.text().includes(troisPersSing) && !sentenceToConjug.text().includes(premPersPlur) && !sentenceToConjug.text().includes(deuxPersPlur) && !sentenceToConjug.text().includes(troisPersPlur))) {
             if (sentenceToConjug.text().includes("je") || sentenceToConjug.text().includes("Je") || sentenceToConjug.text().includes("j'") || sentenceToConjug.text().includes("J'")) { // Conjugaison à la première personne du singulier
                 if (premPersSing !== null) { // Si le mots en question peut être conjugué
-                    if (sentenceToConjug.text().includes(name)) { // Et si le mot en question apparaît dans le champs phrase
-                        // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+premPersSing+"\"");
-                        sentenceToConjug.text(sentenceToConjug.text().replace(name, premPersSing)); // Alors remplace le par sa variante
-                        if (vowel.includes(premPersSing.charAt(0)) && sentenceToConjug.text().includes("je")) { // Si le verbe commence par une voyelle
-                            sentenceToConjug.text(sentenceToConjug.text().replace("je", "j'")); // Alors remplace "je" par "j'"
-                        } else if (vowel.includes(premPersSing.charAt(0)) && sentenceToConjug.text().includes("Je")) {
-                            sentenceToConjug.text(sentenceToConjug.text().replace("Je", "J'"));
+                    if (sentenceToConjug.text().includes(name)) { 
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            // Et si le mot en question apparaît dans le champs phrase
+                            // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+premPersSing+"\"");
+                            sentenceToConjug.text(sentenceToConjug.text().replace(name, premPersSing)); // Alors remplace le par sa variante
+                            if (vowel.includes(premPersSing.charAt(0)) && sentenceToConjug.text().includes("je ")) { // Si le verbe commence par une voyelle
+                                sentenceToConjug.text(sentenceToConjug.text().replace("je ", "j'")); // Alors remplace "je" par "j'"
+                            } else if (vowel.includes(premPersSing.charAt(0)) && sentenceToConjug.text().includes("Je ")) {
+                                sentenceToConjug.text(sentenceToConjug.text().replace("Je ", "J'"));
+                            }
                         }
                     }
                 }
             } else if (sentenceToConjug.text().includes("tu") || sentenceToConjug.text().includes("Tu")) { // Conjugaison à la deuxième personne du singulier
                 if (deuxPersSing !== null) {
                     if (sentenceToConjug.text().includes(name)) {
-                        // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+deuxPersSing+"\"");
-                        sentenceToConjug.text(sentenceToConjug.text().replace(name, deuxPersSing));
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+deuxPersSing+"\"");
+                            sentenceToConjug.text(sentenceToConjug.text().replace(name, deuxPersSing));
+                        }
                     }
                 }
             } else if (sentenceToConjug.text().includes("nous") || sentenceToConjug.text().includes("Nous")) { // Conjugaison à la première personne du pluriel
                 if (premPersPlur !== null) {
                     if (sentenceToConjug.text().includes(name)) {
-                        // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+premPersPlur+"\"");
-                        sentenceToConjug.text(sentenceToConjug.text().replace(name, premPersPlur));
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+premPersPlur+"\"");
+                            sentenceToConjug.text(sentenceToConjug.text().replace(name, premPersPlur));
+                        }
                     }
                 }
             } else if (sentenceToConjug.text().includes("vous") || sentenceToConjug.text().includes("Vous")) { // Conjugaison à la deuxième personne du pluriel
                 if (deuxPersPlur !== null) {
                     if (sentenceToConjug.text().includes(name)) {
-                        // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+deuxPersPlur+"\"");
-                        sentenceToConjug.text(sentenceToConjug.text().replace(name, deuxPersPlur));
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+deuxPersPlur+"\"");
+                            sentenceToConjug.text(sentenceToConjug.text().replace(name, deuxPersPlur));
+                        }
                     }
                 }
-            } else if (sentenceToConjug.text().includes("eux") || sentenceToConjug.text().includes("Eux")) { // Conjugaison à la troisième personne du pluriel
+            } else if (sentenceToConjug.text().includes("eux") || sentenceToConjug.text().includes("Eux") || sentenceToConjug.text().includes("ils") || sentenceToConjug.text().includes("Ils") || sentenceToConjug.text().includes("elles") || sentenceToConjug.text().includes("Elles")) { // Conjugaison à la troisième personne du pluriel
                 if (troisPersPlur !== null) {
                     if (sentenceToConjug.text().includes(name)) {
-                        // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+troisPersPlur+"\"");
-                        sentenceToConjug.text(sentenceToConjug.text().replace(name, troisPersPlur));
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+troisPersPlur+"\"");
+                            sentenceToConjug.text(sentenceToConjug.text().replace(name, troisPersPlur));
+                        }
                     }
                 }
-            } else if (troisPersSing !== null) { // Conjugaison à la troisième personne du singulier
-                if (sentenceToConjug.text().includes(name)) {
-                    // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+troisPersSing+"\"");
-                    sentenceToConjug.text(sentenceToConjug.text().replace(name, troisPersSing));
+            } else {
+                if(troisPersSing !== null) { // Conjugaison à la troisième personne du singulier                
+                    if (sentenceToConjug.text().includes(name)) {   
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+troisPersSing+"\"");
+                            sentenceToConjug.text(sentenceToConjug.text().replace(name, troisPersSing));
+                        }
+                    }
                 }
             }
         }
@@ -124,7 +146,7 @@ function parcoursJSONPlur(jsonObj) {
         let femininPlur = jsonObj[i]['feminin_plur'];       // le féminin pluriel
 
         /* Pluriel */
-        if (sentenceToConjug.text().includes("des") || sentenceToConjug.text().includes("Des") || sentenceToConjug.text().includes("mes") || sentenceToConjug.text().includes("Mes") || sentenceToConjug.text().includes("tes") || sentenceToConjug.text().includes("Tes") || sentenceToConjug.text().includes("ses") || sentenceToConjug.text().includes("Ses") || sentenceToConjug.text().includes("les") || sentenceToConjug.text().includes("Les") || sentenceToConjug.text().includes("ces") || sentenceToConjug.text().includes("Ces")) { // pluriel
+        if (sentenceToConjug.text().includes("des") || sentenceToConjug.text().includes("Des") || sentenceToConjug.text().includes("mes") || sentenceToConjug.text().includes("Mes") || sentenceToConjug.text().includes("tes") || sentenceToConjug.text().includes("Tes") || sentenceToConjug.text().includes("ses") || sentenceToConjug.text().includes("Ses") || sentenceToConjug.text().includes("/^les$/") || sentenceToConjug.text().includes("Les") || sentenceToConjug.text().includes("ces") || sentenceToConjug.text().includes("Ces")) { // pluriel
             // console.log("Cette phrase contient un determinant du pluriel")
             if (sentenceToConjug.text().includes(name)[gender] === "féminin" && femininPlur !== null) {
                 femPlur = true;

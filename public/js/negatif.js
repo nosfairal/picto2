@@ -34,6 +34,7 @@ function getResponseNeg(){
 
 /* Parcours Objets Pictogramme Négatif */
 function parcoursJSONNeg(jsonObj) {
+    let phrase = [];
     for(let i = 0; i< jsonObj.length; i++){
         let name = jsonObj[i]['name'].toLowerCase();        // Renvoie le nom,
         let premPersSing = jsonObj[i]['prem_pers_sing'];    // la première personne du singulier,
@@ -45,62 +46,82 @@ function parcoursJSONNeg(jsonObj) {
 
         /* Négatif */
         // if (!sentenceToConjug.text().includes(premPersSing) && !sentenceToConjug.text().includes(deuxPersSing) && !sentenceToConjug.text().includes(troisPersSing) && !sentenceToConjug.text().includes(premPersPlur) && !sentenceToConjug.text().includes(deuxPersPlur) && !sentenceToConjug.text().includes(troisPersPlur)) {
-            if (sentenceToConjug.text().includes("je") || sentenceToConjug.text().includes("Je")) { // Conjugaison à la première personne du singulier
+            if (sentenceToConjug.text().includes("je") || sentenceToConjug.text().includes("Je") || sentenceToConjug.text().includes("J'") || sentenceToConjug.text().includes("j'")) { // Conjugaison à la première personne du singulier
                 if (premPersSing !== null) { // Si le mots en question peut être conjugué et qu'il ne l'est pas déjà
                     if (sentenceToConjug.text().includes(name)) { // Et si le mot en question apparaît dans le champs phrase
-                        if (vowel.includes(premPersSing.charAt(0))) {
-                            sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + premPersSing + " pas")); // Alors remplace le par sa variante
-                        } else {
-                            sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + premPersSing + " pas")); // Alors remplace le par sa variante
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            if (vowel.includes(premPersSing.charAt(0))) {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + premPersSing + " pas")); // Alors remplace le par sa variante
+                            } else {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + premPersSing + " pas")); // Alors remplace le par sa variante
+                            }
                         }
                     }
                 }
             } else if (sentenceToConjug.text().includes("tu") || sentenceToConjug.text().includes("Tu")) { // Conjugaison à la deuxième personne du singulier
                 if (deuxPersSing !== null) {
                     if (sentenceToConjug.text().includes(name)) {
-                        if (vowel.includes(premPersSing.charAt(0))) {
-                            sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + deuxPersSing + " pas")); // Alors remplace le par sa variante
-                        } else {
-                            sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + deuxPersSing + " pas")); // Alors remplace le par sa variante
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            if (vowel.includes(premPersSing.charAt(0))) {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + deuxPersSing + " pas")); // Alors remplace le par sa variante
+                            } else {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + deuxPersSing + " pas")); // Alors remplace le par sa variante
+                            }
                         }
                     }
                 }
             } else if (sentenceToConjug.text().includes("nous") || sentenceToConjug.text().includes("Nous")) { // Conjugaison à la première personne du pluriel
                 if (premPersPlur !== null) {
                     if (sentenceToConjug.text().includes(name)) {
-                        if (vowel.includes(premPersSing.charAt(0))) {
-                            sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + premPersPlur + " pas")); // Alors remplace le par sa variante
-                        } else {
-                            sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + premPersPlur + " pas")); // Alors remplace le par sa variante
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            if (vowel.includes(premPersSing.charAt(0))) {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + premPersPlur + " pas")); // Alors remplace le par sa variante
+                            } else {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + premPersPlur + " pas")); // Alors remplace le par sa variante
+                            }
                         }
                     }
                 }
             } else if (sentenceToConjug.text().includes("vous") || sentenceToConjug.text().includes("Vous")) { // Conjugaison à la deuxième personne du pluriel
                 if (deuxPersPlur !== null) {
                     if (sentenceToConjug.text().includes(name)) {
-                        if (vowel.includes(premPersSing.charAt(0))) {
-                            sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + deuxPersPlur + " pas")); // Alors remplace le par sa variante
-                        } else {
-                            sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + deuxPersPlur + " pas")); // Alors remplace le par sa variante
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            if (vowel.includes(premPersSing.charAt(0))) {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + deuxPersPlur + " pas")); // Alors remplace le par sa variante
+                            } else {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + deuxPersPlur + " pas")); // Alors remplace le par sa variante
+                            }
                         }
                     }
                 }
-            } else if (sentenceToConjug.text().includes("eux") || sentenceToConjug.text().includes("Eux")) { // Conjugaison à la troisième personne du pluriel
+            } else if (sentenceToConjug.text().includes("eux") || sentenceToConjug.text().includes("Eux") || sentenceToConjug.text().includes("ils") || sentenceToConjug.text().includes("Ils") || sentenceToConjug.text().includes("elles") || sentenceToConjug.text().includes("Elles")) { // Conjugaison à la troisième personne du pluriel
                 if (troisPersPlur !== null) {
                     if (sentenceToConjug.text().includes(name)) {
-                        if (vowel.includes(premPersSing.charAt(0))) {
-                            sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + troisPersPlur + " pas")); // Alors remplace le par sa variante
-                        } else {
-                            sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + troisPersPlur + " pas")); // Alors remplace le par sa variante
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            if (vowel.includes(premPersSing.charAt(0))) {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + troisPersPlur + " pas")); // Alors remplace le par sa variante
+                            } else {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + troisPersPlur + " pas")); // Alors remplace le par sa variante
+                            }
                         }
                     }
                 }
-            } else if (troisPersSing !== null) { // Conjugaison à la troisième personne du singulier
-                if (sentenceToConjug.text().includes(name)) {
-                    if (vowel.includes(premPersSing.charAt(0))) {
-                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + troisPersSing + " pas")); // Alors remplace le par sa variante
-                    } else {
-                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + troisPersSing + " pas")); // Alors remplace le par sa variante
+            } else if (sentenceToConjug.text().includes("il") || sentenceToConjug.text().includes("Il") || sentenceToConjug.text().includes("elle") || sentenceToConjug.text().includes("Elle")) {
+                if (troisPersSing !== null) { // Conjugaison à la troisième personne du singulier
+                    if (sentenceToConjug.text().includes(name)) {
+                        phrase.push(name);
+                        if (phrase.length === 1){
+                            if (vowel.includes(premPersSing.charAt(0))) {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + troisPersSing + " pas")); // Alors remplace le par sa variante
+                            } else {
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + troisPersSing + " pas")); // Alors remplace le par sa variante
+                            }
+                        }
                     }
                 }
             }
