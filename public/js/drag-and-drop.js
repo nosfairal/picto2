@@ -57,10 +57,6 @@ $("#drop .drop").droppable({
             drop: function (ev, ui) {
                 let draggableElement = $(ui.helper); // Clone du pictogramme draggé
                 let droppedOn = $(this);
-                let titleElement = draggableElement.attr('title');
-                let titleDroppedOn = droppedOn.attr('title');
-                console.log(titleElement);
-                console.log(titleDroppedOn);
                 // La classe de contrainte est retiré de la zone de drop
                 draggableElement.parent().removeClass("pictoPresent");
                 draggableElement.remove(); // Le pictogramme disparait

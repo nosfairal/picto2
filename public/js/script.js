@@ -76,12 +76,17 @@ function textUpdate(){
     $('.drop').each(function(){ // Parcourt les zones de drop
         if ($("#mot"+i).children().attr('alt') !== undefined) { // Si la zone de drop contient un picto
             pictoWord = $("#mot"+i).children().attr('alt'); // Récupère le mot correspondant au pictogramme
-            pictograms.push(pictoWord); // Et l'envoie dans le tableau
+            if (pictoWord == "l'" || pictoWord == "L'" || pictoWord == "j'" || pictoWord == "J'") {
+                pictoWordSpace = pictoWord;
+            } else {
+                pictoWordSpace = pictoWord + ' ';
+            }
+            pictograms.push(pictoWordSpace); // Et l'envoie dans le tableau
         }
         i++;
     })
-
-    let sentence = pictograms.join(' ');    // Join les éléments du tableau par un espace
+    let sentence = pictograms.join('');    // Join les éléments du tableau par un espace
+    
     starLevel(sentence);
     getDataConj("/api/get/pictogram"); // (récupère les variantes du pictogramme pour la conjugaison)
     sentence = sentence.charAt(0).toUpperCase() + sentence.substring(1).toLowerCase(); // Met la première lettre de la phrase en majuscule, et le reste en minuscule
@@ -99,8 +104,12 @@ function negUpdate() {
         let pictoWord;
         if ($("#mot" + i).children().attr('alt') !== undefined) { // Si la zone de drop contient un picto
             pictoWord = $("#mot" + i).children().attr('alt'); // Récupère le mot correspondant au pictogramme
-
-            pictograms.push(pictoWord); // Et l'envoie dans le tableau
+            if (pictoWord == "l'" || pictoWord == "L'" || pictoWord == "j'" || pictoWord == "J'") {
+                pictoWordSpace = pictoWord;
+            } else {
+                pictoWordSpace = pictoWord + ' ';
+            }
+            pictograms.push(pictoWordSpace); // Et l'envoie dans le tableau
         }
         i++;
     })
@@ -111,7 +120,7 @@ function negUpdate() {
     } else if (pictograms.length >=2) {
         getDataNeg("/api/get/pictogram"); // (récupère les variantes du pictogramme pour la conjugaison)
     }
-    let sentence = pictograms.join(' ');    // Join les éléments du tableau par un espace
+    let sentence = pictograms.join('');    // Join les éléments du tableau par un espace
     starLevel(sentence);
     sentence = sentence.charAt(0).toUpperCase() + sentence.substring(1).toLowerCase(); // Met la première lettre de la phrase en majuscule, et le reste en minuscule
     $("#sentenceText").append(sentence);  // Affiche la phrase dans la zone prévue pour
