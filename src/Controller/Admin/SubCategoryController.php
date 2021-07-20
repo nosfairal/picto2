@@ -52,7 +52,7 @@ Class SubCategoryController extends AbstractController
         $form->handleRequest($request);
 
         $therapistId=$this->em->getRepository(Therapist::class)->find($this->getUser()->getId());
-        // $subcategory->setTherapistId($therapistId);
+        $subcategory->setTherapistId($therapistId);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $subcategory = $form->getData();

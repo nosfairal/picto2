@@ -85,7 +85,7 @@ Class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         $therapistId=$this->em->getRepository(Therapist::class)->find($this->getUser()->getId());
-        $category->setTherapist($therapistId);
+        //$category->setTherapist($therapistId);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->getData();
@@ -110,7 +110,7 @@ Class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         $therapistId=$this->em->getRepository(Therapist::class)->find($this->getUser()->getId());
-        $pictogram->setTherapist($therapistId);
+        //$pictogram->setTherapist($therapistId);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->get('category')->getData();
@@ -118,6 +118,9 @@ Class CategoryController extends AbstractController
 
             if ( $category  && $subcategory) {
                 $this->addFlash('echec', 'Ne peut avoir qu\'une catégorie ou une sous-catégorie');
+                return $this->redirectToRoute('newPictogram');
+            } elseif (!$category && !$subcategory) {
+                $this->addFlash('echec', 'Doit posséder une catégorie ou une sous-catégorie');
                 return $this->redirectToRoute('newPictogram');
             } else {
                 $pictogram = $form->getData();
