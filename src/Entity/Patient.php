@@ -21,11 +21,6 @@ class Patient implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private $email;
-
-    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -70,17 +65,6 @@ class Patient implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
 
     /**
      * A visual identifier that represents this user.
@@ -218,10 +202,6 @@ class Patient implements UserInterface
         return $this;
     }
 
-    public function __toString(): ?string
-    {
-        return $this->getEmail();
-    }
 /**
      * @return Collection|Sentence[]
      */

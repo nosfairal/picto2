@@ -158,7 +158,6 @@ class PatientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $oldPassword = $form->get('Password')->getData();
             if ($encoder->isPasswordValid($therapist, $oldPassword)) {
-                $patient->setEmail('Patient désactivé numéro ' . $id);
                 $patient->setFirstName('Patient désactivé numéro ' . $id);
                 $patient->setLastName('Patient désactivé numéro ' . $id);
                 $this->entityManager->flush();
