@@ -43,7 +43,6 @@ function getResponseConj(){
 /* Parcours Objets Pictogramme à Conjuguer */
 function parcoursJSONConj(jsonObj) {
     let phrase = [];
-
     // word = sentenceToConjug.text().split(' ');
     for(let i = 0; i< jsonObj.length; i++) {
         let name = jsonObj[i]['name'].toLowerCase();        // Renvoie le nom,       
@@ -53,6 +52,7 @@ function parcoursJSONConj(jsonObj) {
         let premPersPlur = jsonObj[i]['prem_pers_plur'];    // la première personne du pluriel,
         let deuxPersPlur = jsonObj[i]['deux_pers_plur'];    // la deuxième,
         let troisPersPlur = jsonObj[i]['trois_pers_plur'];  // la troisième
+        let participe = jsonObj[i]['participe'];  // le participe passé
         // Si un verbe est déjà présent alors ne conjugue plus rien
         // Si la valeur du champs participe du pictogramme n'est pas égale à null
 
@@ -60,16 +60,20 @@ function parcoursJSONConj(jsonObj) {
         if ((premPersSing === name.substring(0, name.length-1)) || (name == 'avoir') || (name == 'descendre') || (name == 'se moucher') || (name == "s'habiller") || (name == "se déshabiller") || (name == 'mettre') || (!sentenceToConjug.text().includes(premPersSing) && !sentenceToConjug.text().includes(deuxPersSing) && !sentenceToConjug.text().includes(troisPersSing) && !sentenceToConjug.text().includes(premPersPlur) && !sentenceToConjug.text().includes(deuxPersPlur) && !sentenceToConjug.text().includes(troisPersPlur))) {
             if (sentenceToConjug.text().includes("je") || sentenceToConjug.text().includes("Je") || sentenceToConjug.text().includes("j'") || sentenceToConjug.text().includes("J'")) { // Conjugaison à la première personne du singulier
                 if (premPersSing !== null) { // Si le mots en question peut être conjugué
-                    if (sentenceToConjug.text().includes(" " + name + " ") || sentenceToConjug.text().includes("'" + name + " ")) { 
-                        phrase.push(name);
+
+                    if (sentenceToConjug.text().includes(" " + name + " ") || sentenceToConjug.text().includes("'" + name + " ")) { // Et si le mot en question apparaît dans le champs phrase
+                        phrase.push(name); 
                         if (phrase.length === 1){
-                            // Et si le mot en question apparaît dans le champs phrase
                             // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+premPersSing+"\"");
                             sentenceToConjug.text(sentenceToConjug.text().replace(name, premPersSing)); // Alors remplace le par sa variante
                             if (vowel.includes(premPersSing.charAt(0)) && sentenceToConjug.text().includes("je ")) { // Si le verbe commence par une voyelle
                                 sentenceToConjug.text(sentenceToConjug.text().replace("je ", "j'")); // Alors remplace "je" par "j'"
                             } else if (vowel.includes(premPersSing.charAt(0)) && sentenceToConjug.text().includes("Je ")) {
                                 sentenceToConjug.text(sentenceToConjug.text().replace("Je ", "J'"));
+                            }
+                        } else if (phrase.length === 2) {
+                            if (sentenceToConjug.text().includes("'ai ") || sentenceToConjug.text().includes(" suis ")){
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
                             }
                         }
                     }
@@ -80,7 +84,11 @@ function parcoursJSONConj(jsonObj) {
                         phrase.push(name);
                         if (phrase.length === 1){
                             // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+deuxPersSing+"\"");
-                            sentenceToConjug.text(sentenceToConjug.text().replace(name, deuxPersSing));
+                            sentenceToConjug.text(sentenceToConjug.text().replace(name, deuxPersSing));                       
+                        } else if (phrase.length === 2) {
+                            if (sentenceToConjug.text().includes(" as ") || sentenceToConjug.text().includes(" es ")){
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
+                            }
                         }
                     }
                 }
@@ -91,6 +99,10 @@ function parcoursJSONConj(jsonObj) {
                         if (phrase.length === 1){
                             // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+premPersPlur+"\"");
                             sentenceToConjug.text(sentenceToConjug.text().replace(name, premPersPlur));
+                        } else if (phrase.length === 2) {
+                            if (sentenceToConjug.text().includes(" avons ") || sentenceToConjug.text().includes(" sommes ")){
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
+                            }
                         }
                     }
                 }
@@ -101,6 +113,10 @@ function parcoursJSONConj(jsonObj) {
                         if (phrase.length === 1){
                             // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+deuxPersPlur+"\"");
                             sentenceToConjug.text(sentenceToConjug.text().replace(name, deuxPersPlur));
+                        } else if (phrase.length === 2) {
+                            if (sentenceToConjug.text().includes("'ai ") || sentenceToConjug.text().includes(" suis ")){
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
+                            }
                         }
                     }
                 }
@@ -111,6 +127,10 @@ function parcoursJSONConj(jsonObj) {
                         if (phrase.length === 1){
                             // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+troisPersPlur+"\"");
                             sentenceToConjug.text(sentenceToConjug.text().replace(name, troisPersPlur));
+                        } else if (phrase.length === 2) {
+                            if (sentenceToConjug.text().includes(" ont ") || sentenceToConjug.text().includes(" sont ")){
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
+                            }
                         }
                     }
                 }
@@ -121,6 +141,10 @@ function parcoursJSONConj(jsonObj) {
                         if (phrase.length === 1){
                             // console.log("Cette phrase contient \""+name+"\" qui doit donc être remplacé par \""+troisPersSing+"\"");
                             sentenceToConjug.text(sentenceToConjug.text().replace(name, troisPersSing));
+                        } else if (phrase.length === 2) {
+                            if (sentenceToConjug.text().includes(" a ") || sentenceToConjug.text().includes(" est ")){
+                                sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
+                            }
                         }
                     }
                 }

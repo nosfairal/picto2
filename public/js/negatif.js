@@ -49,6 +49,7 @@ function parcoursJSONNeg(jsonObj) {
             if (sentenceToConjug.text().includes("je") || sentenceToConjug.text().includes("Je") || sentenceToConjug.text().includes("J'") || sentenceToConjug.text().includes("j'")) { // Conjugaison à la première personne du singulier
                 if (premPersSing !== null) { // Si le mots en question peut être conjugué et qu'il ne l'est pas déjà
                     if (sentenceToConjug.text().includes(" " + name + " ") || sentenceToConjug.text().includes("'" + name + " ")) { // Et si le mot en question apparaît dans le champs phrase
+
                         phrase.push(name);
                         if (phrase.length === 1){
                             if (vowel.includes(premPersSing.charAt(0))) {
