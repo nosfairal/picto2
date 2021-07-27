@@ -119,7 +119,7 @@ Class CategoryController extends AbstractController
             if ( $category  && $subcategory) {
                 $this->addFlash('echec', 'Ne peut avoir qu\'une catégorie ou une sous-catégorie');
                 return $this->redirectToRoute('newPictogram');
-            } elseif (!$category && !$subcategory) {
+            } else if (!$category && !$subcategory) {
                 $this->addFlash('echec', 'Doit posséder une catégorie ou une sous-catégorie');
                 return $this->redirectToRoute('newPictogram');
             } else {

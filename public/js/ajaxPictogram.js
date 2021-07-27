@@ -137,7 +137,6 @@ function parcoursJSON1(categorie, jsonObj1,jsonObj) {  //
         for(let i = 0; i< jsonObj.length; i++){
             if (jsonObj[i]['category']) {
                 if(jsonObj[i]['category']['name'] === categorie){
-                    // console.log('test')
                     let filename = jsonObj[i]['filename'];
                     let name = jsonObj[i]['name'].toLowerCase();
                     let id = jsonObj[i]['id'];
