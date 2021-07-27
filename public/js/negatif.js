@@ -48,7 +48,7 @@ function parcoursJSONNeg(jsonObj) {
         // if (!sentenceToConjug.text().includes(premPersSing) && !sentenceToConjug.text().includes(deuxPersSing) && !sentenceToConjug.text().includes(troisPersSing) && !sentenceToConjug.text().includes(premPersPlur) && !sentenceToConjug.text().includes(deuxPersPlur) && !sentenceToConjug.text().includes(troisPersPlur)) {
             if (sentenceToConjug.text().includes("je") || sentenceToConjug.text().includes("Je") || sentenceToConjug.text().includes("J'") || sentenceToConjug.text().includes("j'")) { // Conjugaison à la première personne du singulier
                 if (premPersSing !== null) { // Si le mots en question peut être conjugué et qu'il ne l'est pas déjà
-                    if (sentenceToConjug.text().includes(name)) { // Et si le mot en question apparaît dans le champs phrase
+                    if (sentenceToConjug.text().includes(" " + name + " ") || sentenceToConjug.text().includes("'" + name + " ")) { 
                         phrase.push(name);
                         if (phrase.length === 1){
                             if (vowel.includes(premPersSing.charAt(0))) {
@@ -61,7 +61,7 @@ function parcoursJSONNeg(jsonObj) {
                 }
             } else if (sentenceToConjug.text().includes("tu") || sentenceToConjug.text().includes("Tu")) { // Conjugaison à la deuxième personne du singulier
                 if (deuxPersSing !== null) {
-                    if (sentenceToConjug.text().includes(name)) {
+                    if (sentenceToConjug.text().includes(" " + name + " ")) {
                         phrase.push(name);
                         if (phrase.length === 1){
                             if (vowel.includes(premPersSing.charAt(0))) {
@@ -74,7 +74,7 @@ function parcoursJSONNeg(jsonObj) {
                 }
             } else if (sentenceToConjug.text().includes("nous") || sentenceToConjug.text().includes("Nous")) { // Conjugaison à la première personne du pluriel
                 if (premPersPlur !== null) {
-                    if (sentenceToConjug.text().includes(name)) {
+                    if (sentenceToConjug.text().includes(" " + name + " ")) {
                         phrase.push(name);
                         if (phrase.length === 1){
                             if (vowel.includes(premPersSing.charAt(0))) {
@@ -87,7 +87,7 @@ function parcoursJSONNeg(jsonObj) {
                 }
             } else if (sentenceToConjug.text().includes("vous") || sentenceToConjug.text().includes("Vous")) { // Conjugaison à la deuxième personne du pluriel
                 if (deuxPersPlur !== null) {
-                    if (sentenceToConjug.text().includes(name)) {
+                    if (sentenceToConjug.text().includes(" " + name + " ")) {
                         phrase.push(name);
                         if (phrase.length === 1){
                             if (vowel.includes(premPersSing.charAt(0))) {
@@ -100,7 +100,7 @@ function parcoursJSONNeg(jsonObj) {
                 }
             } else if (sentenceToConjug.text().includes("eux") || sentenceToConjug.text().includes("Eux") || sentenceToConjug.text().includes("ils") || sentenceToConjug.text().includes("Ils") || sentenceToConjug.text().includes("elles") || sentenceToConjug.text().includes("Elles")) { // Conjugaison à la troisième personne du pluriel
                 if (troisPersPlur !== null) {
-                    if (sentenceToConjug.text().includes(name)) {
+                    if (sentenceToConjug.text().includes(" " + name + " ")) {
                         phrase.push(name);
                         if (phrase.length === 1){
                             if (vowel.includes(premPersSing.charAt(0))) {
@@ -113,7 +113,7 @@ function parcoursJSONNeg(jsonObj) {
                 }
             } else {
                 if (troisPersSing !== null) { // Conjugaison à la troisième personne du singulier
-                    if (sentenceToConjug.text().includes(name)) {
+                    if (sentenceToConjug.text().includes(" " + name + " ")) {
                         phrase.push(name);
                         if (phrase.length === 1){
                             if (vowel.includes(premPersSing.charAt(0))) {

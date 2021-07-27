@@ -32,7 +32,11 @@ function wordByword() {
     let  tabWord=[]; //tableau de mot
     tabWord = sentence.split(" "); //tableau de mot découpé
 
-    let brightWord = tabWord[countWord];// mot lu (en fonction de sa position dans le tableau)
+    if (countWord == 0){ 
+        var brightWord = tabWord[countWord] + " ";// mot lu (en fonction de sa position dans le tableau)
+    } else {
+        var brightWord = " " + tabWord[countWord] + " ";// mot lu (en fonction de sa position dans le tableau)
+    }
     // console.log(brightWord);
 
     if (countWord === tabWord.length - 1) {// si le compteur est égale à la taille du tableau -1 alors on remplace le mot lu par un span avec une classe speciale et on remet le compteur à 0

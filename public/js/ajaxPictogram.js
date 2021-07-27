@@ -120,7 +120,8 @@ function getCategorie(categorie){
 /* end Getter Categorie */
 
 /* Parcours SubCategory Pictogram */
-function parcoursJSON1(categorie, jsonObj1,jsonObj) {  // 
+function parcoursJSON1(categorie, jsonObj1,jsonObj) {  //
+    // console.log(jsonObj); 
     let countDiv = $(".contentP > div ").length;
     if(countDiv === 0){ // Si aucun pictogramme n'est présent
         for(let i=0; i< jsonObj1.length;i++){
@@ -128,33 +129,33 @@ function parcoursJSON1(categorie, jsonObj1,jsonObj) {  //
                 let filename = jsonObj1[i]['filename'];
                 let name = jsonObj1[i]['name'].toLowerCase();
                 let id = jsonObj1[i]['id'];
-                // Evite les catégories affichées précédemment
-                if (categorie === 'Sujets' || categorie === 'Actions' || categorie === 'Petits mots') {
-                    continue
-                }
+                
                 // Affiche les sous-catégories
                 $(".contentP").append('<div id="'+id+'" class="sous-categorie subcat audioSCP mx-4" title="'+name+'" ><img src="/images/sous-categories/'+filename+'" class="imgP" title="'+name+'" alt="'+name+'"></div>');
             }
         }
         for(let i = 0; i< jsonObj.length; i++){
-            if(jsonObj[i]['category']['name'] === categorie){
-                let filename = jsonObj[i]['filename'];
-                let name = jsonObj[i]['name'].toLowerCase();
-                let id = jsonObj[i]['id'];
-                // Affiche les pictogrammes désirés
-                $(".contentP").append('<div id="'+id+'" class="picto audioP mx-4" title="'+name+'" ><img src="/images/pictograms/'+filename+'" class="imgP" title="'+name+'" alt="'+name+'"></div>');
-                $(".picto .imgP").draggable({   // Les pictogrammes du carousel deviennent draggable
-                    helper: 'clone',    // Le pictogramme est cloné
-                    revert: 'invalid',  // Le retour ne se produit que si le draggable n'a pas été déposé sur un droppable
-                    start:function(){
-                        if($(this).hasClass("droppedPicto")){
-                            $(this).removeClass("droppedPicto");
-                            $(this).parent().removeClass("pictoPresent");
-                        }
-                    },
-                    appendTo: "body",
-                    snap: ".drop",
-                });
+            if (jsonObj[i]['category']) {
+                if(jsonObj[i]['category']['name'] === categorie){
+                    // console.log('test')
+                    let filename = jsonObj[i]['filename'];
+                    let name = jsonObj[i]['name'].toLowerCase();
+                    let id = jsonObj[i]['id'];
+                    // Affiche les pictogrammes désirés
+                    $(".contentP").append('<div id="'+id+'" class="picto audioP mx-4" title="'+name+'" ><img src="/images/pictograms/'+filename+'" class="imgP" title="'+name+'" alt="'+name+'"></div>');
+                    $(".picto .imgP").draggable({   // Les pictogrammes du carousel deviennent draggable
+                        helper: 'clone',    // Le pictogramme est cloné
+                        revert: 'invalid',  // Le retour ne se produit que si le draggable n'a pas été déposé sur un droppable
+                        start:function(){
+                            if($(this).hasClass("droppedPicto")){
+                                $(this).removeClass("droppedPicto");
+                                $(this).parent().removeClass("pictoPresent");
+                            }
+                        },
+                        appendTo: "body",
+                        snap: ".drop",
+                    });
+                }
             }
         }
     } else {
@@ -166,32 +167,30 @@ function parcoursJSON1(categorie, jsonObj1,jsonObj) {  //
                 let filename = jsonObj1[i]['filename'];
                 let name = jsonObj1[i]['name'].toLowerCase();
                 let id = jsonObj1[i]['id'];
-                // Evite les catégories affichées précédemment
-                if (categorie === 'Sujets' || categorie === 'Actions' || categorie === 'Petits mots') {
-                    continue
-                }
                 // Affiche les sous-catégories
                 $(".contentP").append('<div id="'+id+'" class="sous-categorie subcat audioSCP mx-4" title="'+name+'" ><img src="/images/sous-categories/'+filename+'" class="imgP " title="'+name+'" alt="'+name+'"></div>');
             }
         }
         for(let i = 0; i< jsonObj.length; i++){
-            if(jsonObj[i]['category']['name'] === categorie){
-                let filename = jsonObj[i]['filename'];
-                let name = jsonObj[i]['name'];
-                let id = jsonObj[i]['id'];
-                $(".contentP").append('<div id="'+id+'" class="audioP picto mx-4" title="'+name+'" ><img src="/images/pictograms/'+filename+'" class="imgP" title="'+name+'" alt="'+name+'"></div>');
-                $(".picto .imgP").draggable({   // Les pictogrammes du carousel deviennent draggable
-                    helper: 'clone',    // Le pictogramme est cloné
-                    start:function(){
-                        if($(this).hasClass("droppedPicto")){
-                            $(this).removeClass("droppedPicto");
-                            $(this).parent().removeClass("pictoPresent");
-                        }
-                    },
-                    revert: 'invalid',  // Le retour ne se produit que si le draggable n'a pas été déposé sur un droppable
-                    appendTo: 'body',
-                    snap: '.drop',
-                });
+            if (jsonObj[i]['category']) {
+                if(jsonObj[i]['category']['name'] === categorie){
+                    let filename = jsonObj[i]['filename'];
+                    let name = jsonObj[i]['name'];
+                    let id = jsonObj[i]['id'];
+                    $(".contentP").append('<div id="'+id+'" class="audioP picto mx-4" title="'+name+'" ><img src="/images/pictograms/'+filename+'" class="imgP" title="'+name+'" alt="'+name+'"></div>');
+                    $(".picto .imgP").draggable({   // Les pictogrammes du carousel deviennent draggable
+                        helper: 'clone',    // Le pictogramme est cloné
+                        start:function(){
+                            if($(this).hasClass("droppedPicto")){
+                                $(this).removeClass("droppedPicto");
+                                $(this).parent().removeClass("pictoPresent");
+                            }
+                        },
+                        revert: 'invalid',  // Le retour ne se produit que si le draggable n'a pas été déposé sur un droppable
+                        appendTo: 'body',
+                        snap: '.drop',
+                    });
+                }
             }
         }
     }    
