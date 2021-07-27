@@ -54,20 +54,6 @@ class EditPatientType extends AbstractType
                     ])
                 ]
             ])
-            ->add('email', EmailType::class, [
-                'label' => 'Email',
-                'required' => true,
-                'attr' => [
-                    'placeholder' => 'Email du Patient',
-                    'class' => 'form-control'
-                ],
-                'constraints' => [
-                    new NotBlank(),
-                    new Length([
-                        'max' => 50
-                    ])
-                ]
-            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Inscrire le Patient',
                 'attr' => [

@@ -41,18 +41,16 @@
                     <tr>
                     <th>Nom</th>
                     <th>Prénom</th>
-                    <th class="block">Email</th>
                     <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for patient in patients %}
-                        {% if 'Patient désactivé numéro' in patient.email %} 
+                        {% if 'Patient désactivé numéro' in patient.lastname %} 
                         {% else %}
                             <tr>
                                 <td>{{ patient.lastname }}</td>
-                                <td>{{ patient.firstname }}</td>
-                                <td class="block">{{ patient.email }}</td>
+                                <td>{{ patient.firstname }}</td>      
                                 <td><a href="{{ path('patient_profile', { 'id' : patient.id }) }}" class="text-body" title="Voir le profil de {{ patient.firstname }}"><i class="bi bi-arrow-right-circle-fill"></i></a></td>
                             </tr>
                         {% endif %}
