@@ -28,14 +28,11 @@
                     <th>Scolarité</th>
                     <td class="text-end">{{ form_row(form.schoolGrade, {'label_attr': {'class': 'd-none'}, 'attr': {'class': 'form-control-sm'}}) }}</td>
                 </tr>
-                <tr>
-                    <th>Email</th>
-                    <td class="text-end">{{ form_row(form.email, {'label_attr': {'class': 'd-none'}, 'attr': {'class': 'form-control-sm'}}) }}</td>
-                </tr>
                 </tbody>
             </table>
-            <div class="text-end my-4">
+            <div class="flex-end my-4">
                 {{ form_row(form.submit, {'label': 'Modifier le Profil'}) }}
+                <a href="{{ path('delete_patient', { 'id' : patient.id }) }}" class="btn btn-sm d-none d-md-inline ms-4 py-2 px-°3">Supprimer le profil de {{ patient.firstname }}</a>
             </div>
             {{ form_end(form) }}
         </div>

@@ -1,0 +1,31 @@
+{% extends 'baseTherapist.html.twig' %}
+
+{% block title %}Suppression du profil | PictoPicto{% endblock %}
+
+    {% block body %}
+        <main id="homeWrapper" class="container my-3 py-3 px-5">
+            <div class="text-center py-3">
+                <a id="logo" class="navbar-brand col-md-2 col-lg-2 px-3" href="#"><img src="{{ asset('img/LogoEcam.png') }}" alt="Ecam">
+                </a>
+            </div>
+
+            {% if notificationWarning %}
+                <div class="alert alert-danger">{{ notificationWarning }}</div>
+            {% endif %}
+            {{ form_start(form) }}
+                <div class="text-center my-4">
+                    {{ form_label(form.Password) }}{{ form_widget(form.Password) }}
+                </div>
+            
+                <div class="text-center my-4">
+                    {{ form_row(form.submit, {'label': 'Valider', 'attr': {'class': 'btn'}}) }}
+                </div>
+            {{ form_end(form) }}
+            <div>
+                <a href="{{ path('patient_edit', { 'id' : patient.id }) }}" class="btn btn-sm">Annuler</a>
+            </div>
+        </div>
+
+    </main>
+{% endblock %}
+

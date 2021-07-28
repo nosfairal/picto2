@@ -18,9 +18,15 @@
         <div class="carouselP align-middle" id="listPicto">
             <div class="contentP my-1">
                 {% for picto in pictos %}
-                    <div id="{{ picto.id }}" class="picto mx-4" title="{{ picto.category.name }}" >
-                        <img src="{{ asset('images/pictograms/') }}{{ picto.filename }}" alt="{{ picto.name }}" title="{{ picto.name }}" class="imgP">
-                    </div>
+                    {% if picto.category == null %}
+                        <div id="{{ picto.id }}" class="picto mx-4" title="{{ picto.subcategoryid.categoryid.name }}" >
+                            <img src="{{ asset('images/pictograms/') }}{{ picto.filename }}" alt="{{ picto.name }}" title="{{ picto.name }}" class="imgP">
+                        </div>
+                    {% else %}
+                        <div id="{{ picto.id }}" class="picto mx-4" title="{{ picto.category.name }}" >
+                            <img src="{{ asset('images/pictograms/') }}{{ picto.filename }}" alt="{{ picto.name }}" title="{{ picto.name }}" class="imgP">
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

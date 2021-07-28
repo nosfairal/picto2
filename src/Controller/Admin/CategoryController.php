@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Entity\Therapist;
 use App\Form\SearchType;
 use App\Classe\Search;
+use App\Entity\SubCategory;
 use App\Form\CreateCategoryType;
 use App\Form\CreatePictogramType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -62,13 +63,15 @@ Class CategoryController extends AbstractController
         } else {
             $categories = $this->repository->findAll();// récupère toutes les catégories
             $pict = $this->em->getRepository(Pictogram::class)->findAll();// récupère tous les picto
+            $subcategories = $this->em->getRepository(SubCategory::class)->findAll();// récupère tous les sous-catégories
         }
 
         return $this->render('category/index.html.twig', [
             'form' => $form->createView(),
             'categories'=> $categories,
             'pict' => $pict,
-            'therapist'=>$therapist
+            'subcategory' => $subcategories,
+            'therapist'=>$therapist,
 
         ]);
     }
@@ -82,7 +85,7 @@ Class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         $therapistId=$this->em->getRepository(Therapist::class)->find($this->getUser()->getId());
-        $category->setTherapist($therapistId);
+        //$category->setTherapist($therapistId);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->getData();
@@ -107,17 +110,27 @@ Class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         $therapistId=$this->em->getRepository(Therapist::class)->find($this->getUser()->getId());
-        $pictogram->setTherapist($therapistId);
+        //$pictogram->setTherapist($therapistId);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $pictogram = $form->getData();
-            $this->em->persist($pictogram);
-            $this->em->flush();
-            $this->addFlash('success', 'Pictogramme créé avec succès');
-            return $this->redirectToRoute('category');
+            $category = $form->get('category')->getData();
+            $subcategory = $form->get('subcategory_id')->getData();
+
+            if ( $category  && $subcategory) {
+                $this->addFlash('echec', 'Ne peut avoir qu\'une catégorie ou une sous-catégorie');
+                return $this->redirectToRoute('newPictogram');
+            } else if (!$category && !$subcategory) {
+                $this->addFlash('echec', 'Doit posséder une catégorie ou une sous-catégorie');
+                return $this->redirectToRoute('newPictogram');
+            } else {
+                $pictogram = $form->getData();
+                $this->em->persist($pictogram);
+                $this->em->flush();
+                $this->addFlash('success', 'Pictogramme créé avec succès');
+                return $this->redirectToRoute('category');
+            }
         }
-        if ($form->isSubmitted() && !$form->isValid()) {
-       }
+        
         return $this->render('category/createPictogram.html.twig', [
             'pictogram' => $pictogram,
             'form' => $form->createView()

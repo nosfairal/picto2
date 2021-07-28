@@ -2,8 +2,12 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Note;
+use App\Form\DeleteAccount;
 use App\Form\EditPasswordTherapistType;
 use App\Form\EditTherapistType;
+use App\Repository\NoteRepository;
+use App\Repository\PatientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,7 +77,6 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $oldPassword = $form->get('oldPassword')->getData();
             if ($encoder->isPasswordValid($therapist, $oldPassword)) {
-                //die('cool!');
                 $newPassword = $form->get('newPassword')->getData();
                 $password = $encoder->encodePassword($therapist, $newPassword);
 
@@ -94,4 +97,40 @@ class AdminController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/suppression-du-compte", name="delete_user_form")
+     */
+
+    public function deleteAccount(Request $request, UserPasswordEncoderInterface $encoder, NoteRepository $noteRepository, PatientRepository $patientRepository){
+
+        $notificationWarning = null;
+        $notificationSuccess=null;
+        $therapist = $this->getUser();
+        $id = $therapist->getId();
+        $form = $this->createForm(DeleteAccount::class, $therapist);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $form->get('Password')->getData();
+            if ($encoder->isPasswordValid($therapist, $password)) {
+                
+                $therapist->setEmail('Thérapeute désactivé numéro ' . $id);
+                $therapist->setFirstName('Thérapeute désactivé numéro ' . $id);
+                $therapist->setLastName('Thérapeute désactivé numéro ' . $id);
+                $this->entityManager->flush();
+                $this->addFlash('success', 'Mot de passe modifié avec succès');
+                return $this->redirectToRoute('app_logout');
+            } else {
+                $notificationWarning = "Le mot de passe est incorrect.";
+            }
+        }
+        return $this->render('admin/deleteAccount.html.twig', [
+            'form' => $form->createView(),
+            'notificationSuccess' => $notificationSuccess,
+            'notificationWarning' =>$notificationWarning
+        ]);
+    }
+
 }

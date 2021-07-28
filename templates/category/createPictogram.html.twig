@@ -45,9 +45,11 @@
             <div class="row my-1">
                 <div class="col" id="some-custom-id">
                     {{ form_label(form.category) }}{{ form_widget(form.category) }}
+                    <div class="form-text">Veuillez sélectionner soit une catégorie soit une sous-catégorie.</div>
                 </div>
                 <div class="col" id="some-custom-id">
-                    {{ form_label(form.genre) }}{{ form_widget(form.genre) }}
+                    {{ form_label(form.subcategory_id) }}{{ form_widget(form.subcategory_id) }}
+                    <div class="form-text">Veuillez sélectionner soit une catégorie soit une sous-catégorie.</div>
                 </div>
             </div>
 
@@ -99,7 +101,7 @@
                     {{ form_label(form.participe) }}{{ form_widget(form.participe) }}
                 </div>
             </div>
-
+            {{ form_label(form.genre) }}{{ form_widget(form.genre) }}
             <div class="text-center my-4">
                 {{ form_row(form.submit) }}
             </div>

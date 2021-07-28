@@ -138,7 +138,7 @@ class Pictogram
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="pictograms")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @Groups("pictogram")
      */
     private $category;
@@ -148,6 +148,12 @@ class Pictogram
      * @ORM\JoinColumn(nullable=true)
      */
     private $therapist;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=SubCategory::class, inversedBy="pictograms_id")
+     * @Groups("pictogram")
+     */
+    private $subcategory_id;
 
     public function __construct()
     {
@@ -449,6 +455,18 @@ class Pictogram
     public function setTherapist($therapist)
     {
         $this->therapist = $therapist;
+
+        return $this;
+    }
+
+    public function getSubcategoryId(): ?SubCategory
+    {
+        return $this->subcategory_id;
+    }
+
+    public function setSubcategoryId(?SubCategory $subcategory_id): self
+    {
+        $this->subcategory_id = $subcategory_id;
 
         return $this;
     }

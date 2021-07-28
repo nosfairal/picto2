@@ -1,6 +1,6 @@
 var waveTherapist = WaveSurfer.create({
     container: "#waveform-therapist",
-     barHeight: 2,
+     barHeight: 6,
      barGap: 6,
     partialRender: true,
     scrollParent: true,
@@ -29,7 +29,7 @@ var waveTherapist = WaveSurfer.create({
 });
 
 function wavesurferTherapist() {
-  $('wave').css("height", "64px");
+  $('wave').css("height", "256px");
   var audioTherapist = window.localStorage.getItem("urlTherapist");
   waveTherapist.load(audioTherapist);
   setTimeout(function () {
