@@ -82,7 +82,7 @@ function getData1(url,url1) { // url = api/get/pictogram  url1 = api/get/subcate
     myRequest.setRequestHeader("content-type","application-json");
     myRequest.send();
     myRequest1=new XMLHttpRequest();
-    myRequest1.onreadystatechange+=getResponse1;
+    myRequest1.onreadystatechange=getResponse1;
     myRequest1.open("GET", url1);
     myRequest1.setRequestHeader("content-type","application-json");
     myRequest1.send();
