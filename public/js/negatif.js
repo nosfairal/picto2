@@ -35,6 +35,9 @@ function getResponseNeg(){
 /* Parcours Objets Pictogramme Négatif */
 function parcoursJSONNeg(jsonObj) {
     let phrase = [];
+    let premierVerbe;
+    let participeVerbe;
+    let infinitifVerbe;
     for(let i = 0; i< jsonObj.length; i++){
         let name = jsonObj[i]['name'].toLowerCase();        // Renvoie le nom,
         let premPersSing = jsonObj[i]['prem_pers_sing'];    // la première personne du singulier,
@@ -43,19 +46,46 @@ function parcoursJSONNeg(jsonObj) {
         let premPersPlur = jsonObj[i]['prem_pers_plur'];    // la première personne du pluriel,
         let deuxPersPlur = jsonObj[i]['deux_pers_plur'];    // la deuxième,
         let troisPersPlur = jsonObj[i]['trois_pers_plur'];  // la troisième,
+        let participe = jsonObj[i]['participe'];  // le participe passé
 
         /* Négatif */
         // if (!sentenceToConjug.text().includes(premPersSing) && !sentenceToConjug.text().includes(deuxPersSing) && !sentenceToConjug.text().includes(troisPersSing) && !sentenceToConjug.text().includes(premPersPlur) && !sentenceToConjug.text().includes(deuxPersPlur) && !sentenceToConjug.text().includes(troisPersPlur)) {
             if (sentenceToConjug.text().includes("je") || sentenceToConjug.text().includes("Je") || sentenceToConjug.text().includes("J'") || sentenceToConjug.text().includes("j'")) { // Conjugaison à la première personne du singulier
                 if (premPersSing !== null) { // Si le mots en question peut être conjugué et qu'il ne l'est pas déjà
                     if (sentenceToConjug.text().includes(" " + name + " ") || sentenceToConjug.text().includes("'" + name + " ")) { // Et si le mot en question apparaît dans le champs phrase
-
                         phrase.push(name);
                         if (phrase.length === 1){
+                            premierVerbe = premPersSing;
+                            infinitifVerbe = name;
+                            participeVerbe = participe;
                             if (vowel.includes(premPersSing.charAt(0))) {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + premPersSing + " pas")); // Alors remplace le par sa variante
                             } else {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + premPersSing + " pas")); // Alors remplace le par sa variante
+                            }
+                        } else if (phrase.length === 2) {
+                            let orderPremierVerbe = sentenceToConjug.text().indexOf(premierVerbe);
+                            let orderDeuxiemeVerbe = sentenceToConjug.text().indexOf(phrase[1]);
+                            if (orderPremierVerbe < orderDeuxiemeVerbe){
+                                if (sentenceToConjug.text().includes("'ai ") || sentenceToConjug.text().includes(" suis ")){
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
+                                }
+                            } else if ( orderPremierVerbe > orderDeuxiemeVerbe) {
+                                if (name == "avoir" || name == "être"){
+                                    if (vowel.includes(premPersSing.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + premPersSing + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + premPersSing + " pas")); // Alors remplace le par sa variante
+                                    }
+                                    sentenceToConjug.text(sentenceToConjug.text().replace("ne " + premierVerbe + " pas", participeVerbe));  
+                                } else {
+                                    if (vowel.includes(premPersSing.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + premPersSing + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + premPersSing + " pas")); // Alors remplace le par sa variante
+                                    }
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(premierVerbe, infinitifVerbe)); 
+                                }
                             }
                         }
                     }
@@ -65,10 +95,37 @@ function parcoursJSONNeg(jsonObj) {
                     if (sentenceToConjug.text().includes(" " + name + " ")) {
                         phrase.push(name);
                         if (phrase.length === 1){
-                            if (vowel.includes(premPersSing.charAt(0))) {
+                            premierVerbe = deuxPersSing;
+                            infinitifVerbe = name;
+                            participeVerbe = participe;
+                            if (vowel.includes(deuxPersSing.charAt(0))) {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + deuxPersSing + " pas")); // Alors remplace le par sa variante
                             } else {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + deuxPersSing + " pas")); // Alors remplace le par sa variante
+                            }
+                        } else if (phrase.length === 2) {
+                            let orderPremierVerbe = sentenceToConjug.text().indexOf(premierVerbe);
+                            let orderDeuxiemeVerbe = sentenceToConjug.text().indexOf(phrase[1]);
+                            if (orderPremierVerbe < orderDeuxiemeVerbe){
+                                if (sentenceToConjug.text().includes("'ai ") || sentenceToConjug.text().includes(" suis ")){
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
+                                }
+                            } else if ( orderPremierVerbe > orderDeuxiemeVerbe) {
+                                if (name == "avoir" || name == "être"){
+                                    if (vowel.includes(deuxPersSing.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + deuxPersSing + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + deuxPersSing + " pas")); // Alors remplace le par sa variante
+                                    }
+                                    sentenceToConjug.text(sentenceToConjug.text().replace("ne " + premierVerbe + " pas", participeVerbe));  
+                                } else {
+                                    if (vowel.includes(deuxPersSing.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + deuxPersSing + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + deuxPersSing + " pas")); // Alors remplace le par sa variante
+                                    }
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(premierVerbe, infinitifVerbe)); 
+                                }
                             }
                         }
                     }
@@ -78,10 +135,37 @@ function parcoursJSONNeg(jsonObj) {
                     if (sentenceToConjug.text().includes(" " + name + " ")) {
                         phrase.push(name);
                         if (phrase.length === 1){
-                            if (vowel.includes(premPersSing.charAt(0))) {
+                            premierVerbe = premPersPlur;
+                            infinitifVerbe = name;
+                            participeVerbe = participe;
+                            if (vowel.includes(premPersPlur.charAt(0))) {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + premPersPlur + " pas")); // Alors remplace le par sa variante
                             } else {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + premPersPlur + " pas")); // Alors remplace le par sa variante
+                            }
+                        } else if (phrase.length === 2) {
+                            let orderPremierVerbe = sentenceToConjug.text().indexOf(premierVerbe);
+                            let orderDeuxiemeVerbe = sentenceToConjug.text().indexOf(phrase[1]);
+                            if (orderPremierVerbe < orderDeuxiemeVerbe){
+                                if (sentenceToConjug.text().includes("'ai ") || sentenceToConjug.text().includes(" suis ")){
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
+                                }
+                            } else if ( orderPremierVerbe > orderDeuxiemeVerbe) {
+                                if (name == "avoir" || name == "être"){
+                                    if (vowel.includes(premPersPlur.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + premPersPlur + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + premPersPlur + " pas")); // Alors remplace le par sa variante
+                                    }
+                                    sentenceToConjug.text(sentenceToConjug.text().replace("ne " + premierVerbe + " pas", participeVerbe));  
+                                } else {
+                                    if (vowel.includes(premPersPlur.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + premPersPlur + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + premPersPlur + " pas")); // Alors remplace le par sa variante
+                                    }                                    
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(premierVerbe, infinitifVerbe)); 
+                                }
                             }
                         }
                     }
@@ -91,10 +175,37 @@ function parcoursJSONNeg(jsonObj) {
                     if (sentenceToConjug.text().includes(" " + name + " ")) {
                         phrase.push(name);
                         if (phrase.length === 1){
-                            if (vowel.includes(premPersSing.charAt(0))) {
+                            premierVerbe = deuxPersPlur;
+                            infinitifVerbe = name;
+                            participeVerbe = participe;
+                            if (vowel.includes(deuxPersPlur.charAt(0))) {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + deuxPersPlur + " pas")); // Alors remplace le par sa variante
                             } else {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + deuxPersPlur + " pas")); // Alors remplace le par sa variante
+                            }
+                        } else if (phrase.length === 2) {
+                            let orderPremierVerbe = sentenceToConjug.text().indexOf(premierVerbe);
+                            let orderDeuxiemeVerbe = sentenceToConjug.text().indexOf(phrase[1]);
+                            if (orderPremierVerbe < orderDeuxiemeVerbe){
+                                if (sentenceToConjug.text().includes("'ai ") || sentenceToConjug.text().includes(" suis ")){
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
+                                }
+                            } else if ( orderPremierVerbe > orderDeuxiemeVerbe) {
+                                if (name == "avoir" || name == "être"){
+                                    if (vowel.includes(deuxPersPlur.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + deuxPersPlur + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + deuxPersPlur + " pas")); // Alors remplace le par sa variante
+                                    }
+                                    sentenceToConjug.text(sentenceToConjug.text().replace("ne " + premierVerbe + " pas", participeVerbe));  
+                                } else {
+                                    if (vowel.includes(deuxPersPlur.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + deuxPersPlur + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + deuxPersPlur + " pas")); // Alors remplace le par sa variante
+                                    }                                    
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(premierVerbe, infinitifVerbe)); 
+                                }
                             }
                         }
                     }
@@ -104,10 +215,37 @@ function parcoursJSONNeg(jsonObj) {
                     if (sentenceToConjug.text().includes(" " + name + " ")) {
                         phrase.push(name);
                         if (phrase.length === 1){
-                            if (vowel.includes(premPersSing.charAt(0))) {
+                            premierVerbe = troisPersPlur;
+                            infinitifVerbe = name;
+                            participeVerbe = participe;
+                            if (vowel.includes(troisPersPlur.charAt(0))) {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + troisPersPlur + " pas")); // Alors remplace le par sa variante
                             } else {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + troisPersPlur + " pas")); // Alors remplace le par sa variante
+                            }
+                        } else if (phrase.length === 2) {
+                            let orderPremierVerbe = sentenceToConjug.text().indexOf(premierVerbe);
+                            let orderDeuxiemeVerbe = sentenceToConjug.text().indexOf(phrase[1]);
+                            if (orderPremierVerbe < orderDeuxiemeVerbe){
+                                if (sentenceToConjug.text().includes("'ai ") || sentenceToConjug.text().includes(" suis ")){
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
+                                }
+                            } else if ( orderPremierVerbe > orderDeuxiemeVerbe) {
+                                if (name == "avoir" || name == "être"){
+                                    if (vowel.includes(troisPersPlur.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + troisPersPlur + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + troisPersPlur + " pas")); // Alors remplace le par sa variante
+                                    }
+                                    sentenceToConjug.text(sentenceToConjug.text().replace("ne " + premierVerbe + " pas", participeVerbe));  
+                                } else {
+                                    if (vowel.includes(troisPersPlur.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + troisPersPlur + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + troisPersPlur + " pas")); // Alors remplace le par sa variante
+                                    }                                    
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(premierVerbe, infinitifVerbe)); 
+                                }
                             }
                         }
                     }
@@ -117,10 +255,37 @@ function parcoursJSONNeg(jsonObj) {
                     if (sentenceToConjug.text().includes(" " + name + " ")) {
                         phrase.push(name);
                         if (phrase.length === 1){
-                            if (vowel.includes(premPersSing.charAt(0))) {
+                            premierVerbe = troisPersSing;
+                            infinitifVerbe = name;
+                            participeVerbe = participe;
+                            if (vowel.includes(troisPersSing.charAt(0))) {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + troisPersSing + " pas")); // Alors remplace le par sa variante
                             } else {
                                 sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + troisPersSing + " pas")); // Alors remplace le par sa variante
+                            }
+                        } else if (phrase.length === 2) {
+                            let orderPremierVerbe = sentenceToConjug.text().indexOf(premierVerbe);
+                            let orderDeuxiemeVerbe = sentenceToConjug.text().indexOf(phrase[1]);
+                            if (orderPremierVerbe < orderDeuxiemeVerbe){
+                                if (sentenceToConjug.text().includes("'ai ") || sentenceToConjug.text().includes(" suis ")){
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(name, participe)); // Alors remplace le par sa variante
+                                }
+                            } else if ( orderPremierVerbe > orderDeuxiemeVerbe) {
+                                if (name == "avoir" || name == "être"){
+                                    if (vowel.includes(troisPersSing.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + troisPersSing + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + troisPersSing + " pas")); // Alors remplace le par sa variante
+                                    }
+                                    sentenceToConjug.text(sentenceToConjug.text().replace("ne " + premierVerbe + " pas", participeVerbe));  
+                                } else {
+                                    if (vowel.includes(troisPersSing.charAt(0))) {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "n'" + troisPersSing + " pas")); // Alors remplace le par sa variante
+                                    } else {
+                                        sentenceToConjug.text(sentenceToConjug.text().replace(name, "ne " + troisPersSing + " pas")); // Alors remplace le par sa variante
+                                    }                                    
+                                    sentenceToConjug.text(sentenceToConjug.text().replace(premierVerbe, infinitifVerbe)); 
+                                }
                             }
                         }
                     }
