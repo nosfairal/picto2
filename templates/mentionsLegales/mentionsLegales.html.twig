@@ -1,38 +1,48 @@
 {% extends 'base.html.twig' %}
-{% block body %}
-<div class="container p-1 m-5 fs-5">
-    <div class="row">
-        <div class="col-10">
-            <h1 class="text-center my-5">Mentions légales</h1>
-            <p class="fst-italic fs-6 text-center">En vigueur au 14/04/2021</p>
 
-            <p>Conformément aux dispositions des Articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour la
+{% block title %}Mention Legales | PictoPicto
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/test.css') }}" type="text/css">
+{% endblock %}
+{% block body %}
+<div class="container-fluid text-center" id="wrapper">
+    <div class="text-center py-4">
+            <a id="logo" href="{{ path('home') }}"><img src="{{ asset('img/LogoEcam.png') }}" alt="PictoPicto">
+            </a>
+    </div>
+    <div class=" container">
+        <div >
+            <h1 class="text-center my-5">Mentions légales</h1>
+            <p class="fst-italic fs-6 text-center text-white">En vigueur au 14/04/2021</p>
+
+            <p class="text-white">Conformément aux dispositions des Articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour la
                 Confiance dans l’économie numérique, dite L.C.E.N., il est porté à la connaissance des Utilisateurs du
                 site www.formation-informatiques.fr les présentes mentions légales.
                 La connexion et la navigation sur le site (indiquer le nom du site) par l’Utilisateur implique acceptation
                 intégrale et sans réserve des présentes mentions légales.
                 Ces dernières sont accessibles sur le site à la rubrique « Mentions légales ».</p>
 
-            <h4 class="mt-4">ARTICLE 1 : L’éditeur</h4>
+            <h4 class="mt-4 text-white">ARTICLE 1 : L’éditeur</h4>
 
-            <p>L’édition et la direction de la publication du site www.formation-informatiques.fr est assurée par
+            <p class="Retour text-white">L’édition et la direction de la publication du site www.formation-informatiques.fr est assurée par
                 M Benkherrat Moncef dont l'adresse e-mail est pictopictoecam@gmail.com.</p>
 
-            <h4 class="mt-4">ARTICLE 2 : L’hébergeur</h4>
+            <h4 class="mt-4 text-white">ARTICLE 2 : L’hébergeur</h4>
 
-            <p>L'hébergeur du site www.formation-informatiques.fr est la Société OVH, dont le siège social est situé
+            <p class="Retour text-white">L'hébergeur du site www.formation-informatiques.fr est la Société OVH, dont le siège social est situé
                 au 2 rue Kellermann 59100 ROUBAIX , avec le numéro de téléphone : 0955006633.</p>
 
-            <h4 class="mt-4">ARTICLE 3 : Accès au site</h4>
+            <h4 class="mt-4 text-white">ARTICLE 3 : Accès au site</h4>
 
-            <p>Le site est accessible  7j/7, 24h/24 sauf cas de force majeure, interruption
+            <p class="Retour text-white">Le site est accessible  7j/7, 24h/24 sauf cas de force majeure, interruption
                 programmée ou non et pouvant découler d’une nécessité de maintenance.
                 En cas de modification, interruption ou suspension des services le site www.formation-informatiques.fr
                 ne saurait être tenu responsable.</p>
 
-            <h4 class="mt-4">ARTICLE 4 : Collecte des données</h4>
+            <h4 class="mt-4 text-white">ARTICLE 4 : Collecte des données</h4>
 
-            <p>Le site assure à l'Utilisateur une collecte et un traitement d'informations personnelles dans le respect
+            <p class="Retour text-white">Le site assure à l'Utilisateur une collecte et un traitement d'informations personnelles dans le respect
                 de la vie privée conformément à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers
                 et aux libertés.
                 {# Le site est déclaré à la CNIL sous le numéro _______________. #}
@@ -42,9 +52,9 @@
                 - par mail à l'adresse email pictopictoecam@gmail.com</p>
 
 
-            <h4 class="mt-4">ARTICLE 5 : Propriété intellectuelle</h4>
+            <h4 class="mt-4 text-white">ARTICLE 5 : Propriété intellectuelle</h4>
 
-            <p>Toute utilisation, reproduction, diffusion, commercialisation, modification de toute ou partie du site
+            <p class="Retour text-white">Toute utilisation, reproduction, diffusion, commercialisation, modification de toute ou partie du site
                 www.formation-informatiques.fr, sans autorisation de l’Editeur est prohibée et pourra entraînée des
                 actions et poursuites judiciaires prévues par le Code de la propriété
                 intellectuelle et le Code civil.</p>
@@ -52,7 +62,7 @@
         </div>
     </div>
 
-    <div class="m-5">
-        <a href="{{ path('home') }}">Retour à l'accueil</a>
+    <div class="mt-5 text-center ">
+                    <a class="Retour" href="{{ path('home') }}">Retour à l'accueil</a>
     </div>
 {% endblock %}

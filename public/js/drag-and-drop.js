@@ -61,8 +61,6 @@ $("#drop .drop").droppable({
                 // La classe de contrainte est retiré de la zone de drop
                 draggableElement.parent().removeClass("pictoPresent");
                 draggableElement.remove(); // Le pictogramme disparait
-                $("#pos").hide();
-                $("#neg").show();
                 textUpdate(); // La phrase est mis à jour
                 
             },
@@ -77,29 +75,12 @@ $("#drop .drop").droppable({
                 // La classe de contrainte est retiré de la zone de drop
                 draggableElement.parent().removeClass("pictoPresent");
                 draggableElement.remove(); // Le pictogramme disparait
-                $("#pos").hide();
-                $("#neg").show();
                 textUpdate(); // La phrase est mis à jour
                 
             },
         })
+        
     }
 })
-$(".wrapperSCP").droppable({
-    // Il n'accepte que les pictogrammes qui ont déjà été droppé
-    accept: ".droppedPicto",
-    tolerance: "fit",
-    drop: function (ev, ui) {
-        let draggableElement = $(ui.helper); // Clone du pictogramme draggé
-        let droppedOn = $(this);
-        // La classe de contrainte est retiré de la zone de drop
-        draggableElement.parent().removeClass("pictoPresent");
-        draggableElement.remove(); // Le pictogramme disparait
-        $("#pos").hide();
-        $("#neg").show();
-        textUpdate(); // La phrase est mis à jour
-        
-    },
-})
-/* end Drop */
 
+/* end Drop */

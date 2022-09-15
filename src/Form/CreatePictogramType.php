@@ -132,13 +132,7 @@ class CreatePictogramType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('participe', TextType::class, [
-                'label' => 'Participe passé du verbe: ',
-                'required' => false,
-                'attr' => [
-                    'class' => 'form-control'
-                ]
-            ])
+            
             ->add('masculin_sing', TextType::class, [
                 'label' => 'Masculin singulier du mot:',
                 'required' => false,

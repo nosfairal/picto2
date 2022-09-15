@@ -42,13 +42,31 @@ function parcoursJSON(jsonObj) {
     $(".contentC").append('<div id="1" class="picto categorie audioC mx-4" title="Sujets" ><img src="/images/categories/sujets.png" alt="Sujet"></div>');
     $(".contentC").append('<div id="3" class="picto categorie audioC mx-4" title="Actions" ><img src="/images/categories/actions.png" alt="Action"></div>');
     $(".contentC").append('<div id="10" class="picto categorie audioC mx-4" title="Petits mots" ><img src="/images/categories/determinants.png" alt="Petits mots"></div>');
+    $(".contentC").append('<div id="4" class="picto categorie audioC mx-4" title="Adjectifs" ><img src="/images/categories/adjectifs.png" alt="Adjectifs"></div>');
+    $(".contentC").append('<div id="2" class="picto categorie audioC mx-4" title="Boissons" ><img src="/images/categories/boissons.png" alt="Boissons"></div>');
+    $(".contentC").append('<div id="6" class="picto categorie audioC mx-4" title="Animaux" ><img src="/images/categories/animaux.png" alt="Animaux"></div>');
+    $(".contentC").append('<div id="5" class="picto categorie audioC mx-4" title="Aliments" ><img src="/images/categories/aliments.png" alt="Aliments"></div>');
+    $(".contentC").append('<div id="12" class="picto categorie audioC mx-4" title="Fruits et légumes" ><img src="/images/categories/fruitsEtLegumes.png" alt="Fruits et légumes"></div>');
+    $(".contentC").append('<div id="17" class="picto categorie audioC mx-4" title="Objets" ><img src="/images/categories/objets.png" alt="Objets"></div>');
+    $(".contentC").append('<div id="7" class="picto categorie audioC mx-4" title="Chiffres" ><img src="/images/categories/chiffres.png" alt="Chiffres"></div>');
+    $(".contentC").append('<div id="33" class="picto categorie audioC mx-4" title="Jouet" ><img src="/images/categories/jouet.png" alt="Jouet"></div>');
+    $(".contentC").append('<div id="26" class="picto categorie audioC mx-4" title="Sports" ><img src="/images/categories/sports.png" alt="Sports"></div>');
+    $(".contentC").append('<div id="9" class="picto categorie audioC mx-4" title="Couleurs" ><img src="/images/categories/couleurs.png" alt="Couleurs"></div>');
+    $(".contentC").append('<div id="27" class="picto categorie audioC mx-4" title="Couverts" ><img src="/images/categories/couverts.png" alt="Couverts"></div>');
+    $(".contentC").append('<div id="8" class="picto categorie audioC mx-4" title="Corps humain" ><img src="/images/categories/corpsHumain.png" alt="Corps humain"></div>');
+    $(".contentC").append('<div id="11" class="picto categorie audioC mx-4" title="Émotions" ><img src="/images/categories/emotions.png" alt="Émotions"></div>');
+    $(".contentC").append('<div id="14" class="picto categorie audioC mx-4" title="Lieux" ><img src="/images/categories/lieux.png" alt="Lieux"></div>');
+    $(".contentC").append('<div id="15" class="picto categorie audioC mx-4" title="Météo" ><img src="/images/categories/meteo.png" alt="Météo"></div>');
+    $(".contentC").append('<div id="19" class="picto categorie audioC mx-4" title="Scolarité" ><img src="/images/categories/scolarite.png" alt="Scolarité"></div>');
+    $(".contentC").append('<div id="21" class="picto categorie audioC mx-4" title="Vêtements" ><img src="/images/categories/vetements.png" alt="Vêtements"></div>');
+
     // Parcourt les objets JSON
     for(let i=0; i< jsonObj.length;i++){
         let categorie = jsonObj[i]['name'];
         let imageCategorie = jsonObj[i]['filename'];
         let idCategorie = jsonObj[i]['id'];
         // Evite les catégories affichées précédemment
-        if (categorie === 'Sujets' || categorie === 'Actions' || categorie === 'Petits mots') {
+        if (categorie === 'Sujets' || categorie === 'Actions' || categorie === 'Petits mots'|| categorie === 'Adjectifs'|| categorie === 'Boissons'|| categorie === 'Animaux'|| categorie === 'Aliments'|| categorie === 'Fruits et légumes'|| categorie === 'Objets'|| categorie === 'Chiffres'|| categorie === 'Jouet'|| categorie === 'Sports'|| categorie === 'Couleurs'|| categorie === 'Corps humain'|| categorie === 'Émotions'|| categorie === 'Lieux'|| categorie === 'Météo'|| categorie === 'Scolarité'|| categorie === 'Vêtements') {
             continue
         }
         // Affiche les catégories

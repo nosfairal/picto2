@@ -5,8 +5,10 @@
 {% block dialogue %}
     {# Question #}
     <div>
-        <select name="question" id="question" class="form-select form-select-lg align-self-end align-middle text-center py-4" aria-label=".form-select-lg default">
-            <option value="">Choisir une question ...</option>
+        {# <select name="question" id="question" class="form-select form-select-lg align-self-end align-middle text-center py-4" aria-label=".form-select-lg default">
+            <option  value="">Choisir une question ...</option> #}
+            <select name="question" id="question" class="form-select form-select-lg align-self-end align-middle text-center py-3" aria-label=".form-select-lg example">
+                <option selected>Choisir une question ...</option>
             {% for question in questions %}
                 <option class="audioQ" title="{{ question.text }}">{{ question.text }}</option>
             {% endfor %}
@@ -38,12 +40,23 @@
         </button>
     </div>
     {# end Carousel #}
-
-    {#<div id="pictoQuestion">
-        {% for pictoQuest in pictoQuests %}
-            {{ pictoQuest.filename }}
+    {# Drop #}
+    <hr class="my-3">
+    <div id="drop" class="d-flex justify-content-evenly mb-3">
+        {% for i in 1..10 %}
+            <div id="mot{{i}}" class="drop"></div>
         {% endfor %}
-    </div>#}
+    </div>
+    {# end Drop #}
+    {# Phrase #}
+        {% block phrase %}
+            <div id="sentence" class="d-flex align-items-center">
+                <div id="sentenceField" class="flex-grow-1 text-center py-1  border-radius-all ">
+                    <span id="sentenceText"></span>
+                </div>
+            </div>
+        {% endblock %}
+    {# end Phrase #}
 {% endblock %}
 {% block commands %}
     {% block menu %}
@@ -66,6 +79,9 @@
     <script src="{{ asset('js/carousel.js') }}"></script>
     <script src="{{ asset('js/conjugating.js') }}"></script>
     <script src="{{ asset('js/negatif.js') }}"></script>
+    <script src="{{ asset('js/futur.js') }}"></script>
+    <script src="{{ asset('js/passe.js') }}"></script>
+    <script src="{{ asset('js/ajouter_supprimer_case.js') }}"></script>
     <script src="{{ asset('js/checkWidth.js') }}"></script>
 {% endblock %}
 

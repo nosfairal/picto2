@@ -1,0 +1,191 @@
+{% extends 'basePatient.html.twig' %}
+
+{% block title %}Game | PictoPicto{% endblock %}
+
+{% block game %}
+
+<body class="container col-12">
+  <h1 class="page-title"><span class="PBlue">P</span>icto<span class="PRouge">P</span>icto Memory</p> </h1>
+  <div class="overlay-text visible">
+    Cliquez pour commencer
+  </div>
+  <div id="game-over-text" class="overlay-text">
+    Essaye encore
+    <span class="overlay-text-small">Cliquez pour rejouer</span>
+  </div>
+  <div id="victory-text" class="overlay-text">
+    Victoire !
+    <span class="overlay-text-small">Cliquez pour rejouer</span>
+  </div>
+  <div class="game-container">
+    <div class="game-info-container">
+      <div class="game-info">
+        Time : <span id="time-remaining">300</span>
+      </div>
+      <div class="game-info">
+        Flips : <span id="flips">0</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/chien.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/chien.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/poisson-clown.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/poisson-clown.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/canard.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/canard.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/chat.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/chat.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/cheval.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/cheval.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/dauphin.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/dauphin.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/lion.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/lion.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/papillon.png') }}" width="140">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-back card-face">
+        <img class="spider" src="{{ asset('img/LogoEcam.png') }}" width="100">
+      </div>
+      <div class="card-front card-face">
+        <img class="card-value" src="{{ asset('images/Game/papillon.png') }}" width="140">
+      </div>
+    </div>
+  </div>
+ 
+</body>
+
+
+{% endblock %}
+
+{% block commands %}
+  {% block menu %}
+  {% endblock %}
+  {% block buttons %}
+  {% endblock %}
+{% endblock %}
+
+
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/jquery-3.6.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.ui.touch-punch.js') }}"></script>
+    <script src="{{ asset('js/drag-and-drop.js') }}"></script>
+    <script src="{{ asset('js/ajaxPictogram.js') }}"></script>
+    <script src="{{ asset('js/question.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/carousel.js') }}"></script>
+    <script src="{{ asset('js/conjugating.js') }}"></script>
+    <script src="{{ asset('js/negatif.js') }}"></script>
+    <script src="{{ asset('js/game.js') }}"></script>
+    <script src="{{ asset('js/futur.js') }}"></script>
+    <script src="{{ asset('js/passe.js') }}"></script>
+    <script src="{{ asset('js/ajouter_supprimer_case.js') }}"></script>
+    <script src="{{ asset('js/checkWidth.js') }}"></script>
+{% endblock %}

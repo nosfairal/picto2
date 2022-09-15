@@ -93,7 +93,7 @@ class Category
         $this->subCategories = new ArrayCollection();
     }
 
-    public function __toString(): ?string
+    public function __toString(): string
     {
         return $this->getName();
     }

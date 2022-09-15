@@ -15,6 +15,7 @@ class ResetPasswordRequestFormType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'attr' => [
+                    'placeholder' => 'Votre email',
                     'class' => 'form-control'
                 ],
                 'constraints' => [
@@ -22,8 +23,7 @@ class ResetPasswordRequestFormType extends AbstractType
                         'message' => 'Merci d\'entrer votre email.',
                     ]),
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

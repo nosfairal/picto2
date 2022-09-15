@@ -5,17 +5,19 @@
     <link rel="stylesheet" href="{{ asset('css/connexion.css') }}" type="text/css">
 {% endblock %}
 {% block body %}
-<div class="text-center mt-4">
-    <a id="logo" class="px-3" href="{{ path('home') }}"><img src="{{ asset('img/LogoEcam.png') }}" alt="Ecam">
-    </a>
-</div>
-<main id="homeWrapper" class="container my-4 py-4 px-5">
-    <p>
+
+<main id="homeWrapper" class="container rounded my-4 py-4 px-5">
+    <div class="text-center mt-4">
+        <a id="logo" class="px-3" href="{{ path('home') }}"><img src="{{ asset('img/LogoEcam.png') }}" alt="Ecam">
+        </a>
+    </div></br>
+    <p class="fw-bold text-center">
         Un email vient de vous être envoyé.
         Le lien de validation expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}. Pensez à consulter vos spams.
-    </p>
-    <p>Je n'ai rien reçu? <a href="{{ path('app_forgot_password_request') }}">Me renvoyer le lien</a>.</p>
-    <a href="{{ path('home') }}">Revenir à l'accueil</a>
+    </p></br>
+    <p class="fw-bold">Je n'ai rien reçu ? <a href="{{ path('app_forgot_password_request') }}" class="text-decoration-underline text-success"> Me renvoyer le lien</a>.</p>
+
+    <a href="{{ path('home') }}" class="switch__button button switch-btn a-button" type="button"><p>Revenir à l'accueil</p></a>
 
 </main
 {% endblock %}

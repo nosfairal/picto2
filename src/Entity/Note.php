@@ -92,7 +92,7 @@ class Note
         return $this;
     }
 
-    public function __toString(): ?string
+    public function __toString(): string
     {
         return $this->getComment();
     }

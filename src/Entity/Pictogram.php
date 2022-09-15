@@ -101,12 +101,6 @@ class Pictogram
     private $trois_pers_plur;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("pictogram")
-     */
-    private $participe;
-
-    /**
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Groups("pictogram")
      */
@@ -154,6 +148,80 @@ class Pictogram
      * @Groups("pictogram")
      */
     private $subcategory_id;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $prem_pers_sing_futur;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $deux_pers_sing_futur;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $trois_pers_sing_futur;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $prem_pers_plur_futur;
+
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $deux_pers_plur_futur;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $trois_pers_plur_futur;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $prem_pers_sing_passe;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $deux_pers_sing_passe;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $trois_pers_sing_passe;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $prem_pers_plur_passe;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $deux_pers_plur_passe;
+
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("pictogram")
+     */
+    private $trois_pers_plur_passe;
 
     public function __construct()
     {
@@ -273,17 +341,6 @@ class Pictogram
         return $this;
     }
 
-    public function getParticipe(): ?string
-    {
-        return $this->participe;
-    }
-
-    public function setParticipe(?string $participe): self
-    {
-        $this->participe = $participe;
-
-        return $this;
-    }
 
     public function getMasculinSing(): ?string
     {
@@ -467,6 +524,150 @@ class Pictogram
     public function setSubcategoryId(?SubCategory $subcategory_id): self
     {
         $this->subcategory_id = $subcategory_id;
+
+        return $this;
+    }
+
+    public function getPremPersSingFutur(): ?string
+    {
+        return $this->prem_pers_sing_futur;
+    }
+
+    public function setPremPersSingFutur(?string $prem_pers_sing_futur): self
+    {
+        $this->prem_pers_sing_futur = $prem_pers_sing_futur;
+
+        return $this;
+    }
+
+    public function getDeuxPersSingFutur(): ?string
+    {
+        return $this->deux_pers_sing_futur;
+    }
+
+    public function setDeuxPersSingFutur(?string $deux_pers_sing_futur): self
+    {
+        $this->deux_pers_sing_futur = $deux_pers_sing_futur;
+
+        return $this;
+    }
+
+    public function getTroisPersSingFutur(): ?string
+    {
+        return $this->trois_pers_sing_futur;
+    }
+
+    public function setTroisPersSingFutur(?string $trois_pers_sing_futur): self
+    {
+        $this->trois_pers_sing_futur = $trois_pers_sing_futur;
+
+        return $this;
+    }
+
+    public function getPremPersPlurFutur(): ?string
+    {
+        return $this->prem_pers_plur_futur;
+    }
+
+    public function setPremPersPlurFutur(?string $prem_pers_plur_futur): self
+    {
+        $this->prem_pers_plur_futur = $prem_pers_plur_futur;
+
+        return $this;
+    }
+
+    public function getDeuxPersPlurFutur(): ?string
+    {
+        return $this->deux_pers_plur_futur;
+    }
+
+    public function setDeuxPersPlurFutur(?string $deux_pers_plur_futur): self
+    {
+        $this->deux_pers_plur_futur = $deux_pers_plur_futur;
+
+        return $this;
+    }
+
+    public function getTroisPersPlurFutur(): ?string
+    {
+        return $this->trois_pers_plur_futur;
+    }
+
+    public function setTroisPersPlurFutur(?string $trois_pers_plur_futur): self
+    {
+        $this->trois_pers_plur_futur = $trois_pers_plur_futur;
+
+        return $this;
+    }
+
+    public function getPremPersSingPasse(): ?string
+    {
+        return $this->prem_pers_sing_passe;
+    }
+
+    public function setPremPersSingPasse(?string $prem_pers_sing_passe): self
+    {
+        $this->prem_pers_sing_passe = $prem_pers_sing_passe;
+
+        return $this;
+    }
+
+    public function getDeuxPersSingPasse(): ?string
+    {
+        return $this->deux_pers_sing_passe;
+    }
+
+    public function setDeuxPersSingPasse(?string $deux_pers_sing_passe): self
+    {
+        $this->deux_pers_sing_passe = $deux_pers_sing_passe;
+
+        return $this;
+    }
+
+    public function getTroisPersSingPasse(): ?string
+    {
+        return $this->trois_pers_sing_passe;
+    }
+
+    public function setTroisPersSingPasse(?string $trois_pers_sing_passe): self
+    {
+        $this->trois_pers_sing_passe = $trois_pers_sing_passe;
+
+        return $this;
+    }
+
+    public function getPremPersPlurPasse(): ?string
+    {
+        return $this->prem_pers_plur_passe;
+    }
+
+    public function setPremPersPlurPasse(?string $prem_pers_plur_passe): self
+    {
+        $this->prem_pers_plur_passe = $prem_pers_plur_passe;
+
+        return $this;
+    }
+
+    public function getDeuxPersPlurPasse(): ?string
+    {
+        return $this->deux_pers_plur_passe;
+    }
+
+    public function setDeuxPersPlurPasse(?string $deux_pers_plur_passe): self
+    {
+        $this->deux_pers_plur_passe = $deux_pers_plur_passe;
+
+        return $this;
+    }
+
+    public function getTroisPersPlurPasse(): ?string
+    {
+        return $this->trois_pers_plur_passe;
+    }
+
+    public function setTroisPersPlurPasse(?string $trois_pers_plur_passe): self
+    {
+        $this->trois_pers_plur_passe = $trois_pers_plur_passe;
 
         return $this;
     }

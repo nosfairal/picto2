@@ -18,17 +18,15 @@
         </div>
         <div class="d-flex justify-content-around my-3 py-3">
             <a href="{% if patient is defined %} {{ path('exchange', {'id' : patient.id }) }} {% else %} {{ path('guest_exchange') }} {% endif %}" class="btn py-3 d-block text-center d-flex px-4">
-                <i class="fas fa-comment-dots pe-auto my-auto"></i>
+                <i class="fa-solid fa-comments"></i>
                 <span class="mx-auto">Echange</span>
             </a>
         </div>
-        {#{% if patient is defined %}
         <div class="d-flex justify-content-around my-3 py-3">
-            <a href="{{ path('audio', {'id' : patient.id }) }}" class="btn py-3 d-block text-center d-flex px-4">
-                <i class="fas fa-volume-up pe-auto my-auto"></i>
-                <span class="mx-auto">Mes Phrases</span>
-            </a>
-        </div>
-        {% endif %}#}
+            <a href="{% if patient is defined %} {{ path('game', {'id' : patient.id }) }} {% else %} {{ path('guest_game') }} {% endif %}" class="btn py-3 d-block text-center d-flex px-4">
+            <i class="fa-solid fa-gamepad"></i>
+            <span class="mx-auto">Jeu de mémoire</span>
+        </a>
     </div>
-{% endblock%}
+    </div>
+{% endblock %}

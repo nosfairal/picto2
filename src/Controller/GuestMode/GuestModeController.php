@@ -50,4 +50,16 @@ class GuestModeController extends AbstractController
             'questions'=>$questions
         ]);
     }
+    /**
+     * @Route("/game", name="guest_game")
+     */
+    public function GameGuest(CategoryRepository $repository,PictogramRepository $pictogramRepository): Response
+    {
+        $categories = $repository->findAll();
+        $pictos = $pictogramRepository->findAll();
+        return $this->render('game/index.html.twig', [
+            'categories' => $categories,
+            'pictos' => $pictos,
+        ]);
+    }
 }

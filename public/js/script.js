@@ -119,8 +119,6 @@ function negUpdate() {
     })
     if (pictograms.length <= 1) {
         alert("La phrase n'est pas assez complète pour être négative");
-        $("#pos").hide();
-        $("#neg").show();
     } else if (pictograms.length >=2) {
         getDataNeg("/api/get/pictogram"); // (récupère les variantes du pictogramme pour la conjugaison)
     }
@@ -156,20 +154,144 @@ function starLevel(sentence) {
 /* end Star */
 
 /* Négatif/Affirmatif */
-$("#pos").hide();
 $("#neg").click(() => { // Au click sur le bouton "négation"
-    $("#neg").hide()    // Celui-là disparait
-    $("#pos").show()    // Pour faire place au bouton "affirmation"
     negUpdate();        // Fait le traitement relatif à la négation
 })
 $("#pos").click(() => {
-    $("#pos").hide()
-    $("#neg").show()
     textUpdate();
 })
 /* end Négatif/Positif */
 
+/* Mise à jour de la phrase Futur */
+function futurUpdate() {
+    sentenceToConjug.text("");
+    let pictograms = [];    // Tableau qui contiendra les mots correspondants aux pictos droppés
+    let i = 1;
+    $('.drop').each(function(){ // Parcourt les zones de drop
+        let pictoWord;
+        if ($("#mot" + i).children().attr('alt') !== undefined) { // Si la zone de drop contient un picto
+            pictoWord = $("#mot" + i).children().attr('alt'); // Récupère le mot correspondant au pictogramme
+            if (pictoWord == "l'" || pictoWord == "L'" || pictoWord == "j'" || pictoWord == "J'") {
+                pictoWordSpace = pictoWord;
+            } else {
+                pictoWordSpace = pictoWord + ' ';
+            }
+            pictograms.push(pictoWordSpace); // Et l'envoie dans le tableau
+        }
+        i++;
+    })
+    if (pictograms.length <= 1) {
+        alert("La phrase n'est pas assez complète pour être futur");
+    } else if (pictograms.length >=2) {
+        getDataFutur("/api/get/pictogram"); // (récupère les variantes du pictogramme pour la conjugaison)
+    }
+    let sentence = pictograms.join('');    // Join les éléments du tableau par un espace
+    starLevel(sentence);
+    sentence = sentence.charAt(0).toUpperCase() + sentence.substring(1).toLowerCase(); // Met la première lettre de la phrase en majuscule, et le reste en minuscule
+    $("#sentenceText").append(sentence);  // Affiche la phrase dans la zone prévue pour
+}
+/* end Mise à jour de la phrase Futur */
+$("#futur").click(() => { // Au click sur le bouton "futur"
+    futurUpdate();        // Fait le traitement relatif à la futur
+})
 
 
 
 
+
+/* Mise à jour de la phrase Passé */
+function passeUpdate() {
+    sentenceToConjug.text("");
+    let pictograms = [];    // Tableau qui contiendra les mots correspondants aux pictos droppés
+    let i = 1;
+    $('.drop').each(function(){ // Parcourt les zones de drop
+        let pictoWord;
+        if ($("#mot" + i).children().attr('alt') !== undefined) { // Si la zone de drop contient un picto
+            pictoWord = $("#mot" + i).children().attr('alt'); // Récupère le mot correspondant au pictogramme
+            if (pictoWord == "l'" || pictoWord == "L'" || pictoWord == "j'" || pictoWord == "J'") {
+                pictoWordSpace = pictoWord;
+            } else {
+                pictoWordSpace = pictoWord + ' ';
+            }
+            pictograms.push(pictoWordSpace); // Et l'envoie dans le tableau
+        }
+        i++;
+    })
+    if (pictograms.length <= 1) {
+        alert("La phrase n'est pas assez complète pour être passé");
+    } else if (pictograms.length >=2) {
+        getDataPasse("/api/get/pictogram"); // (récupère les variantes du pictogramme pour la conjugaison)
+    }
+    let sentence = pictograms.join('');    // Join les éléments du tableau par un espace
+    newFunction();
+    sentence = sentence.charAt(0).toUpperCase() + sentence.substring(1).toLowerCase(); // Met la première lettre de la phrase en majuscule, et le reste en minuscule
+    $("#sentenceText").append(sentence);  // Affiche la phrase dans la zone prévue pour
+
+
+    function newFunction() {
+        starLevel(sentence);
+    }
+}
+/* end Mise à jour de la phrase Passe */
+$("#passe").click(() => { // Au click sur le bouton "passé"
+    passeUpdate();        // Fait le traitement relatif à la passé
+})
+
+document.getElementById("mot1").ondblclick = function() {myFunction1()};
+function myFunction1() {
+    const varName1 = 'mot1';
+    if(varName1==='mot1'){$("#mot1 > img").remove();$("#mot1").removeClass("pictoPresent")}
+    textUpdate();
+}
+document.getElementById("mot2").ondblclick = function() {myFunction2()};
+function myFunction2() {
+    const varName2 = 'mot2';
+    if(varName2==='mot2'){$("#mot2 > img").remove();$("#mot2").removeClass("pictoPresent")}
+    textUpdate();
+}
+document.getElementById("mot3").ondblclick = function() {myFunction3()};
+function myFunction3() {
+    const varName3 = 'mot3';
+    if(varName3==='mot3'){$("#mot3 > img").remove();$("#mot3").removeClass("pictoPresent")}
+    textUpdate();
+}
+document.getElementById("mot4").ondblclick = function() {myFunction4()};
+function myFunction4() {
+    const varName4 = 'mot4';
+    if(varName4==='mot4'){$("#mot4 > img").remove();$("#mot4").removeClass("pictoPresent")}
+    textUpdate();
+}
+document.getElementById("mot5").ondblclick = function() {myFunction5()};
+function myFunction5() {
+    const varName5 = 'mot5';
+    if(varName5==='mot5'){$("#mot5 > img").remove();$("#mot5").removeClass("pictoPresent")}
+    textUpdate();
+}
+document.getElementById("mot6").ondblclick = function() {myFunction6()};
+function myFunction6() {
+    const varName6 = 'mot6';
+    if(varName6==='mot6'){$("#mot6 > img").remove();$("#mot6").removeClass("pictoPresent")}
+    textUpdate();
+}
+document.getElementById("mot7").ondblclick = function() {myFunction7()};
+function myFunction7() {
+    const varName7 = 'mot7';
+    if(varName7==='mot7'){$("#mot7 > img").remove();$("#mot7").removeClass("pictoPresent")}
+    textUpdate();
+}
+document.getElementById("mot8").ondblclick = function() {myFunction8()};
+function myFunction8() {
+    const varName8 = 'mot8';
+    if(varName8==='mot8'){$("#mot8 > img").remove();$("#mot8").removeClass("pictoPresent")}
+    textUpdate();
+}document.getElementById("mot9").ondblclick = function() {myFunction9()};
+function myFunction9() {
+    const varName9 = 'mot9';
+    if(varName9==='mot9'){$("#mot9 > img").remove();$("#mot9").removeClass("pictoPresent")}
+    textUpdate();
+}document.getElementById("mot10").ondblclick = function() {myFunction10()};
+function myFunction10() {
+    const varName10 = 'mot10';
+    if(varName10==='mot10'){$("#mot10 > img").remove();$("#mot10").removeClass("pictoPresent")}
+    textUpdate();
+}

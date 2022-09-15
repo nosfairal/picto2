@@ -1,69 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription | PictoPicto{% endblock %}
+{% block title %}Inscription | PictoPicto
+{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/connexion.css') }}" type="text/css">
+	<link rel="stylesheet" href="{{ asset('css/test.css') }}" type="text/css">
 {% endblock %}
 {% block body %}
-    <div class="text-center mt-4">
-        <a id="logo" class="px-3" href="{{ path('home') }}"><img src="{{ asset('img/LogoEcam.png') }}" alt="Ecam">
-        </a>
-    </div>
-    <main id="homeWrapper" class="container my-4 py-4 px-5">
-        {{ form_start(form) }}
-        <div>
-            {% if notificationWarning %}
-            <div class="alert alert-danger">{{ notificationWarning }}</div>
-                {% endif %}
-                {% if notificationWarning2 %}
-            <div class="alert alert-danger">{{ notificationWarning2 }}</div>
-            {% endif %}
-        </div>
+	<div class="text-center mt-4">
+		<a id="logo" class="px-3" href="{{ path('home') }}"><img src="{{ asset('img/LogoEcam.png') }}" alt="Ecam">
+		</a>
+	</div>
+	<main id="homeWrapper" class="container my-4 py-4 px-5">
+		{{ form_start(form) }}
+		<div>
+			{% if notificationWarning %}
+				<div class="alert alert-danger">{{ notificationWarning }}</div>
+			{% endif %}
+			{% if notificationWarning2 %}
+				<div class="alert alert-danger">{{ notificationWarning2 }}</div>
+			{% endif %}
+		</div>
 
-        <div class="row my-2">
-            <div class="col-12 col-md-6">
-                {{ form_row(form.firstName) }}
-            </div>
-            <div class="col-12 col-md-6">
-                {{ form_row(form.lastName) }}
-            </div>
-        </div>
-        <div class="row my-2">
-            <div class="col-12 col-md-4">
-                {{ form_row(form.job) }}
-            </div>
-            <div class="col-12 col-md-4">
-                {{ form_row(form.institution) }}
-            </div>
-            <div class="col-12 col-md-4">
-                {{ form_row(form.institutionCode) }}
-            </div>
-        </div>
-        <div class="my-2">
-            {{ form_row(form.email) }}
-        </div>
-        <div class="row my-2">
-            <div class="col-12 col-md-6">
-                {{ form_label(form.password.first) }}
-                {{ form_widget(form.password.first) }}
-            </div>
-            <div class="col-12 col-md-6">
-                {{ form_row(form.password.second) }}
-            </div>
-            <small class="text-center text-danger">
-                {{ form_errors(form.password.first) }}
-            </small>
-        </div>
-        <div class="w-100 text-center">
-            <div class=" my-4 btn" id="register">
-                {{ form_row(form.submit) }}
-            </div>
-        </div>
+		<div class="row my-2">
+			<div class="col-12 col-md-6">
+				{{ form_row(form.firstName) }}
+			</div>
+			<div class="col-12 col-md-6">
+				{{ form_row(form.lastName) }}
+			</div>
+		</div>
+		<div class="row my-2">
+			<div class="col-12 col-md-6">
+				{{ form_row(form.job) }}
+			</div>
+			<div class="col-12 col-md-6">
+				{{ form_row(form.institution) }}
+			</div>
+		</div>
+		<div class="row my-2">
+			<div class="col-12 col-md-6">
+				{{ form_row(form.institutionCode) }}
+			</div>
+			<div class="col-12 col-md-6">
+				{{ form_row(form.email) }}
+			</div>
+		</div>
+		<div class="row my-2">
+			<div class="col-12 col-md-6">
+				{{ form_label(form.password.first) }}
+				{{ form_widget(form.password.first) }}
+			</div>
+			<div class="col-12 col-md-6">
+				{{ form_row(form.password.second) }}
+			</div>
+			<small class="text-center text-danger">
+				{{ form_errors(form.password.first) }}
+			</small>
+		</div>
+		<div class="w-100 text-center">
+			<div class=" my-4 btn" id="register">
+				{{ form_row(form.submit) }}
+			</div>
+		</div>
 
-        {{ form_end(form) }}
-            <div class="text-center my-4">
-                <a href="{{ path('app_login') }}" class="fw-light text-muted">J'ai déjà un compte !</a>
-            </div>
-    </main>
+		{{ form_end(form) }}
+		<div class="text-center my-4">
+			<a href="{{ path('app_login') }}" class="fw-light text-muted">J'ai déjà un compte !</a>
+		</div>
+	</main>
 
 {% endblock %}
